@@ -10,8 +10,8 @@ class Header extends Component {
   render() {
     return (
         <header>
-            <h1>Website Title</h1>
-            <h2>Subtitle</h2>
+            <h1 id="title_id">Website Title</h1>
+            <h3 id="subtitle_id">Subtitle</h3>
         </header>
     );
   }

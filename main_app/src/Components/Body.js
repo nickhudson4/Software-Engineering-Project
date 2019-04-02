@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import '../Styling/App.css';
+import Menu from './Body/Menu';
 
 class Body extends Component {
   render() {
     return (
         <body>
-            This is the body
+          <Menu />
         </body>
     );
   }
