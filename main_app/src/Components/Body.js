@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import '../Styling/App.css';
-import Menu from './Body/Menu';
+import TopbarMenu from './Body/TopbarMenu'
+import SidebarMenu from './Body/SidebarMenu';
 
 class Body extends Component {
   render() {
     return (
         <body>
-          <Menu />
+          <SidebarMenu/>
+          <TopbarMenu/>
         </body>
     );
   }

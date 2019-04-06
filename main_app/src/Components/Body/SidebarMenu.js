@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import '../CompStyling/Menu.css';
 
-class Menu extends Component {
+class SidebarMenu extends Component {
   render() {
     return (
         <div id="sideMenu_div">
-            <a href="#">Option 1</a>
+            <a id="menu_home" href="#">Option 1</a>
             <a href="#">Option 2</a>
             <a href="#">Option 3</a>
             <a href="#">Option 4</a>
@@ -18,4 +18,4 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+export default SidebarMenu;
