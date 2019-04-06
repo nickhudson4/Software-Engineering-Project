@@ -1,3 +1,4 @@
+
 #sideMenu_div {
   background-color: #282828;
   height: 100%; /* Full-height: remove this if you want "auto" height */
@@ -7,39 +8,56 @@
   top: 0; /* Stay at the top */
   left: 0;
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px
+  /* padding-top: 20px */
+}
+
+#sideMenu_div h1 {
+  color: #20a0e5;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px 0px 25px 0px;
+  border-bottom: 2px solid #585858;
+  
 }
 
 /* The navigation menu links */
-#sideMenu_div a {
-  /* padding: 12px 20px 6px 16px; */
-  padding-left: 50px;
-  padding-top: 25px;
-  padding-bottom: 25px;
+#sideMenu_div button {
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
   text-decoration: none;
   font-size: 15px;
   color: white;
   display: block;
+  /* border-style: solid; */
+  border-bottom: 2px solid #383838;
+  width: 220px;
+  background: none;
+	border: none;
+	cursor: pointer;
 }
 
 /* When you mouse over the navigation links, change their color */
-#sideMenu_div a:hover {
+#sideMenu_div button:hover {
   color: #f1f1f1;
   border-left: 2px solid white;
+  background-color: #383838;
 }
 
 #topMenu_div {
   padding-left: 220px;
   background-color: #20a0e5;
-  top: 0; /* Stay at the top */
-  height: 75px;
+  top: 0; 
+  height: 70px;
 }
 
 #topMenu_div a {
-  /* padding-top: 50px;
+  /* padding-top: 30px; */
+  line-height: 70px;
+  padding-left: 50px;
   text-decoration: none;
   font-size: 15px;
   color: white;
- */
-  /* padding-top: 50px; */
+  display: inline-block;
+  vertical-align: middle;
 }

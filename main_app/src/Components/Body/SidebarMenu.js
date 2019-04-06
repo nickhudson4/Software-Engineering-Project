@@ -5,17 +5,26 @@ class SidebarMenu extends Component {
   render() {
     return (
         <div id="sideMenu_div">
-            <a id="menu_home" href="#">Option 1</a>
-            <a href="#">Option 2</a>
-            <a href="#">Option 3</a>
-            <a href="#">Option 4</a>
-            <a href="#">Option 5</a>
-            <a href="#">Option 6</a>
-            <a href="#">Option 7</a>
-            <a href="#">Option 8</a>
+            <h1 href="#">Cryptography<br/>Explorer</h1>
+            <button href="#">Mono-Alphabetic Substitution</button>
+            <button href="#">Vigenre Cipher</button>
+            <button href="#">Scytale</button>
+            <button href="#">Rail Fence</button>
+            <button href="#">Columnar</button>
+            <button href="#">Two Square</button>
+            <button href="#">Four Square</button>
+            <button href="#">Playfair</button>
+            <button href="#">ADFGX</button>
+            <button href="#">ADFGVX</button>
+            <button href="#">LFSR</button>
+            <button href="#">Hill</button>
+            <button href="#">Enigma Machine</button>
+            <button href="#">RSA</button>
+            <button href="#">ElGamal</button>
+
         </div>
     );
   }
 }
 
-export default SidebarMenu;
+export default SidebarMenu
