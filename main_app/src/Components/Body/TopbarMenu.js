@@ -6,7 +6,9 @@ class Menu extends Component {
     return (
         <div id="topMenu_div">
             <a href="#">Home</a>
+            <a href="#">Tools</a>
             <a href="#">About</a>
+            <a href="#">Helps</a>
         </div>
     );
   }
