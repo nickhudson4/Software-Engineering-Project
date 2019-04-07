@@ -3,6 +3,7 @@ import '../Styling/App.css';
 import Header from './Header';
 import Footer from './Footer';
 import Body from './Body';
+import { homedir } from 'os';
 
 /* 
   Main render that renders the other components.
@@ -10,6 +11,9 @@ import Body from './Body';
 */
 
 class App extends Component {
+
+  
+
   render() {
     return (
       <div className="App">
