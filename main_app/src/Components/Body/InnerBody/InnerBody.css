@@ -1,3 +1,20 @@
+
+#homeArea_div {
+    padding-top: 300px;
+}
+
+#homeArea_h1 {
+    color: #20a0e5;
+    padding-left: 220px;
+    text-align: center;
+}
+
+#homeArea_h4 {
+    color: #282828;
+    padding-left: 220px;
+    text-align: center;
+}
+
 #aboutArea_div {
     padding-left: 220px;
     text-align: center;
