@@ -21,7 +21,7 @@ class Body extends Component {
   //Changes state of body from home to cipher
   //cipher being the page displayed for the cipher
   //Home being the opening page
-  sideBarOnClick = (whichButton) => {
+  sideBarOnClick = (whichButton) => { //Use arrow functions to use "this."
     this.setState({
       whichCipher: whichButton,
       currentLayout: 'cipher'
@@ -36,13 +36,11 @@ class Body extends Component {
   }
 
   render() {
-    console.log("Rerendering with state: " + this.state.currentLayout)
-    console.log("Rerendering with state: " + this.state.whichCipher)
     return (
         <body>
           <SidebarMenu onClickFunc = {this.sideBarOnClick}/>
           <TopbarMenu onClickFunc = {this.topBarOnClick}/>
-          <InnerBody whichLayout = {this.state.currentLayout}/>        
+          <InnerBody whichLayout = {this.state.currentLayout} whichCipherClicked = {this.state.whichCipher}/>        
         </body>
     );
   }

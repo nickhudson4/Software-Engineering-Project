@@ -5,6 +5,7 @@ import HomeArea from './InnerBody/HomeArea';
 import AboutArea from './InnerBody/AboutArea';
 
 class InnerBody extends Component {
+  
   render() {
     console.log(this.props.whichLayout);
     if (this.props.whichLayout === 'home'){ //Home screen (No cipher input/output)
@@ -14,7 +15,7 @@ class InnerBody extends Component {
     }
     else if (this.props.whichLayout === 'cipher'){ //Cipher input/output displayed
       return (
-        <CipherArea/>
+        <CipherArea whichCipherClicked = {this.props.whichCipherClicked}/>
       );
     }
     else if (this.props.whichLayout === 'about'){
