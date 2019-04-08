@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../Styling/App.css';
+import './App.css';
 
 /* 
   Main render that renders the other components.

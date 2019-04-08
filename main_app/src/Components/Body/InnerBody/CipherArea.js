@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import '../CompStyling/CipherArea.css';
-
+import './InnerBody.css';
 class CipherArea extends Component {
   render() {
     return (

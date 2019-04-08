@@ -51,8 +51,7 @@
   height: 70px;
 }
 
-#topMenu_div a {
-  /* padding-top: 30px; */
+#topMenu_div button {
   line-height: 70px;
   padding-left: 50px;
   text-decoration: none;
@@ -60,4 +59,11 @@
   color: white;
   display: inline-block;
   vertical-align: middle;
+
+  /* Remove all default button properties */
+  text-decoration: none;
+  background: none;
+	border: none;
+	cursor: pointer;
+  
 }

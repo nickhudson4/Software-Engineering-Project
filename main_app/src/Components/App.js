@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../Styling/App.css';
+import './App.css';
 import Header from './Header';
 import Footer from './Footer';
 import Body from './Body';
@@ -11,9 +11,6 @@ import { homedir } from 'os';
 */
 
 class App extends Component {
-
-  
-
   render() {
     return (
       <div className="App">

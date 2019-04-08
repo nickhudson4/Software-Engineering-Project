@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../CompStyling/Menu.css';
+import './Body.css';
 import { debug } from 'util';
 
 class SidebarMenu extends Component {

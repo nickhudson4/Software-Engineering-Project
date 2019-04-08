@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import '../CompStyling/Menu.css';
+import './Body.css';
 
 class Menu extends Component {
   render() {
     return (
         <div id="topMenu_div">
-            <a href="#">Home</a>
-            <a href="#">Tools</a>
-            <a href="#">About</a>
-            <a href="#">Help</a>
+            <button onClick={() => this.props.onClickFunc("home")}>Home</button>
+            <button onClick={() => this.props.onClickFunc("tools")}>Tools</button>
+            <button onClick={() => this.props.onClickFunc("about")}>About</button>
+            <button onClick={() => this.props.onClickFunc("help")}>Help</button>
+
         </div>
     );
   }
