@@ -4,7 +4,9 @@ import Cipher from './CipherArea/Cipher';
 
 /*
   Static components that are shared between each cipher.
-  Components specific to a cipher are in <Cipher/>
+  Components specific to a cipher are in <Cipher/>.
+  Mainly used for creating input/output text areas
+  and getting original input
 */
 
 class CipherArea extends Component {

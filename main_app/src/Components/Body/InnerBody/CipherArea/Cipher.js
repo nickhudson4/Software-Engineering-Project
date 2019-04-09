@@ -8,9 +8,28 @@ import MonoAlphSub from './Cipher/MonoAlphSub';
 class Cipher extends Component {
   render() {
     return (
-        <MonoAlphSub inputText = {this.props.inputText}/>
+        <div>
+          <GetCipher whichCipher = {this.props.whichCipherClicked}/>
+        </div>
     );
   }
 }
+
+//Renders which cipher the user clicked
+const GetCipher = (props) => {
+  if (props.whichCipher === 'mono'){
+    return (
+      <MonoAlphSub inputText = {this.props.inputText}/>
+    );
+  }
+  else { //Error return empty div
+    return (
+      <div></div>
+    );
+  }
+  
+}
+
+
 
 export default Cipher;
