@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Cipher.css';
+import Table from './Table';
 
 /*
     Renders specific component based on cipher chosen.
@@ -10,7 +11,7 @@ class MonoAlphSub extends Component {
   render() {
     return (
         <div id="monoAlphSub_div">
-        
+          <Table/>
         </div>
     );
   }

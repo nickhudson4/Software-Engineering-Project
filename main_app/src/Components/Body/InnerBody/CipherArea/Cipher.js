@@ -19,7 +19,7 @@ class Cipher extends Component {
 const GetCipher = (props) => {
   if (props.whichCipher === 'mono'){
     return (
-      <MonoAlphSub inputText = {this.props.inputText}/>
+      <MonoAlphSub inputText = {props.inputText}/>
     );
   }
   else { //Error return empty div
