@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Body.css';
+import logo from '../../Media/CryptographyExplorerLogo.png'
 import { debug } from 'util';
 
 class SidebarMenu extends Component {
@@ -13,6 +14,7 @@ class SidebarMenu extends Component {
     return (
         <div id="sideMenu_div">
             <h1>Cryptography<br/>Explorer</h1>
+            {/* <Logo/> */}
 
             
             <button onClick={() => this.props.onClickFunc("mono")}>Mono-Alphabetic Substitution</button>
@@ -34,6 +36,10 @@ class SidebarMenu extends Component {
         </div>
     );
   }
+}
+
+const Logo = () => {
+  return <img src={logo} alt="Logo" height="80" width="220" />;
 }
 
 export default SidebarMenu
