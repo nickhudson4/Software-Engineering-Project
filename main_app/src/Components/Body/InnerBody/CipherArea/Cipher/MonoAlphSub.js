@@ -9,9 +9,12 @@ import Table from './Table';
 
 class MonoAlphSub extends Component {
   render() {
+    var tableHeadings1 = ["Plaintext", "Ciphertext"];
+    var tableHeadings2 = ["Input", "Output"];
+
     return (
         <div id="monoAlphSub_div">
-          <Table/>
+          <Table numRows = {27} numCol = {2} tableHeadings = {tableHeadings1}/>
         </div>
     );
   }
