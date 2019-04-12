@@ -9,6 +9,8 @@ import Table from './Table';
 
 class MonoAlphSub extends Component {
   render() {
+    var inputText = this.props.inputText;
+
     var tableHeadings1 = ["Plaintext", "Ciphertext"];
     var tableHeadings2 = ["Input", "Output"];
 

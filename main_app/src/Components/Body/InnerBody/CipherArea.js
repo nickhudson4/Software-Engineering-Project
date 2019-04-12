@@ -15,14 +15,13 @@ class CipherArea extends Component {
     super(props);
 
     this.state = {
-      inputText: 'none',
+      inputText: '',
     }
   }
   render() {
     return (
         <div id="cipherArea_div">
           <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Input" rows="25" cols="80"></textarea>
-          <textarea className="inputOutput_textArea" id="output_textArea" placeholder="Output" rows="25" cols="80"></textarea>
           <br/>
           <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
           <button type="button">Decrypt</button>

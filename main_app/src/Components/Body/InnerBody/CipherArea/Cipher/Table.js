@@ -10,9 +10,9 @@ class Table extends Component {
         <table>
             <thead>
                 <tr>
-                    <th scope="col" colSpan="1">Fill</th>
-                    <th scope="col" colSpan="1">Fill</th>
-                    {/* <TableHeadings headings = {headings}/> */}
+                    {/* <th scope="col" colSpan="1">Fill</th>
+                    <th scope="col" colSpan="1">Fill</th> */}
+                    <TableHeadings headings = {headings}/>
                 </tr>
             </thead>
             <tbody>
@@ -55,12 +55,12 @@ class Table extends Component {
 
 const TableHeadings = (props) => {
     console.log(props.headings.length);
+    var headingArr = [];
     for (var i = 0; i < props.headings.length; i++){
-        console.log("INNN");
-        return(
-            <th scope="col" colSpan="1">{props.headings[i]}</th>
-        );
+        headingArr.push(<th scope="col" colSpan="1">{props.headings[i]}</th>);
     }
+    
+    return headingArr;
 }
 
 export default Table;
