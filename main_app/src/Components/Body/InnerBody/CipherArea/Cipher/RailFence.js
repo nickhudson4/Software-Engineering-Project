@@ -22,6 +22,9 @@ class RailFence extends Component {
             railsInput: 3 //Defualt number of rails
         }
     }
+
+    
+
     render() {
 
         var isInput = false;
@@ -106,11 +109,20 @@ const Encrypt = (props) => {
 
     return (
         <div>
-            <textarea className="inputOutput_textArea" id="output_textArea" value={encryptedString} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
+            <div>
+                <textarea className="inputOutput_textArea" id="output_textArea" value={encryptedString} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
+            </div>
+            <div>
+                <button onClick={copyToClipboard}>Copy Output</button> 
+            </div>
+
         </div>
+
     );
 
 }
+
+
 
 const Decrypt = (props) => {
     var inputText = props.inputText;
@@ -137,7 +149,6 @@ const Decrypt = (props) => {
 
             if (currentRow === i){
                 //tableArray[i].push(inputText[currentLetter]);
-                console.log("PUSHED: " + inputText[currentLetter] + " to " + i);
                 tableArray[i][j] = inputText[currentLetter];
                 currentLetter++;
             }
@@ -156,6 +167,7 @@ const Decrypt = (props) => {
                 currentRow--;
             } 
         }
+        currentRow = 0;
     }
 
     currentLetter = 0;
@@ -165,11 +177,7 @@ const Decrypt = (props) => {
 
     while (currentLetter < inputText.length){
         var tmp1 = tableArray[j];
-        console.log("Array: " + j + " currentLetter " + currentLetter);
-        //console.log("TEST: " + tmp1[currentLetter]);
-        //if (tmp1[currentLetter] != undefined){
         decryptedString += tmp1[currentLetter];
-        //}
         currentLetter++;
         
         if (j === numRails-1 && goingDown){
@@ -186,28 +194,27 @@ const Decrypt = (props) => {
             j--;
         }
     }
-    var tmp3 = tableArray[0]
-    for (var i = 0; i < tmp3.length; i++){
-        console.log("ar1: " + tmp3[i]);
-    }
-
-    var tmp2 = tableArray[1]
-    for (var i = 0; i < tmp2.length; i++){
-        console.log("ar2: " + tmp2[i]);
-    }
-    var tmp4 = tableArray[2]
-    for (var i = 0; i < tmp4.length; i++){
-        console.log("ar3: " + tmp4[i]);
-    }
-
 
     return (
         <div>
-            <textarea className="inputOutput_textArea" id="output_textArea" value={decryptedString} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
+            <div>
+                <textarea className="inputOutput_textArea" id="output_textArea" value={decryptedString} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
+            </div>
+            <div>
+                <button onClick={copyToClipboard}>Copy Output</button> 
+            </div>
+
         </div>
     );
 
 }
+
+var copyToClipboard = (e) => {
+    var textAreaToCopy = document.getElementById('output_textArea');
+    textAreaToCopy.select();
+    document.execCommand('copy');
+    e.target.focus();
+};
 
 const LoadMode = (props) => {
     var mode = props.mode;
