@@ -10,7 +10,7 @@ class Cipher extends Component {
   render() {
     return (
         <div>
-          <GetCipher whichCipher = {this.props.whichCipherClicked} inputText = {this.props.inputText}/>
+          <GetCipher whichCipher = {this.props.whichCipherClicked} inputText = {this.props.inputText} mode = {this.props.mode}/>
         </div>
     );
   }
@@ -18,14 +18,17 @@ class Cipher extends Component {
 
 //Renders which cipher the user clicked
 const GetCipher = (props) => {
+
+  var mode = props.mode;
+
   if (props.whichCipher === 'mono'){
     return (
-      <MonoAlphSub inputText = {props.inputText}/>
+      <MonoAlphSub inputText = {props.inputText} mode = {mode}/>
     );
   }
   else if (props.whichCipher === 'rail'){
     return (
-      <RailFence inputText = {props.inputText}/>
+      <RailFence inputText = {props.inputText} mode = {mode}/>
     );
   }
   else { //Error return empty div

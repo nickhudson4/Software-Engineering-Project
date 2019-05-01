@@ -7,7 +7,6 @@ import AboutArea from './InnerBody/AboutArea';
 class InnerBody extends Component {
   
   render() {
-    console.log(this.props.whichLayout);
     if (this.props.whichLayout === 'home'){ //Home screen (No cipher input/output)
       return (
         <HomeArea/>

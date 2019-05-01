@@ -16,17 +16,20 @@ class CipherArea extends Component {
 
     this.state = {
       inputText: '',
+      mode: ''
     }
   }
   render() {
+
     return (
         <div id="cipherArea_div">
           <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Input" rows="25" cols="80"></textarea>
           <br/>
           <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
-          <button type="button">Decrypt</button>
+          <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
 
-          <Cipher whichCipherClicked = {this.props.whichCipherClicked} inputText = {this.state.inputText}/>
+
+          <Cipher whichCipherClicked = {this.props.whichCipherClicked} inputText = {this.state.inputText} mode = {this.state.mode}/>
         </div>
     );
   }
@@ -34,7 +37,15 @@ class CipherArea extends Component {
   encryptOnClick = () => {
     var text = document.getElementById("input_textArea").value;  //Inputed text
     this.setState({
-      inputText: text
+      inputText: text,
+      mode: 'encrypt'
+    })
+  }
+  decryptOnClick = () => {
+    var text = document.getElementById("input_textArea").value;  //Inputed text
+    this.setState({
+      inputText: text,
+      mode: 'decrypt'
     })
   }
 }
