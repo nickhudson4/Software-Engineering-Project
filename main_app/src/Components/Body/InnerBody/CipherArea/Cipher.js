@@ -9,9 +9,7 @@ import RailFence from './Cipher/RailFence';
 class Cipher extends Component {
   render() {
     return (
-        <div>
-          <GetCipher whichCipher = {this.props.whichCipherClicked} inputText = {this.props.inputText} mode = {this.props.mode}/>
-        </div>
+        <GetCipher whichCipher = {this.props.whichCipherClicked} inputText = {this.props.inputText} mode = {this.props.mode}/>
     );
   }
 }

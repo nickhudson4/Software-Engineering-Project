@@ -38,11 +38,11 @@ class RailFence extends Component {
             isInput = true;
         }
         return (
-            <div id="railFence_div">
-            <form>
-                Rails: 
-                <input id="rails_input" type="number" min="2" step="1" name="num_rails" value={this.state.railsInput} onChange={evt => this.updateRailsInput(evt)}></input>
-            </form>
+            <div id="railFence_div" className="specific_cipher_class">
+                <form>
+                    Rails: 
+                    <input id="rails_input" type="number" min="2" step="1" name="num_rails" value={this.state.railsInput} onChange={evt => this.updateRailsInput(evt)}></input>
+                </form>
                 <br/>
                 <LoadMode mode = {mode} numRails = {this.state.railsInput} inputText = {inputText}/>
             </div>
@@ -108,16 +108,7 @@ const Encrypt = (props) => {
     }
 
     return (
-        <div>
-            <div>
-                <textarea className="inputOutput_textArea" id="output_textArea" value={encryptedString} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
-            </div>
-            <div>
-                <button onClick={copyToClipboard}>Copy Output</button> 
-            </div>
-
-        </div>
-
+        <OutputTextarea message = {encryptedString}/>
     );
 
 }
@@ -196,15 +187,7 @@ const Decrypt = (props) => {
     }
 
     return (
-        <div>
-            <div>
-                <textarea className="inputOutput_textArea" id="output_textArea" value={decryptedString} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
-            </div>
-            <div>
-                <button onClick={copyToClipboard}>Copy Output</button> 
-            </div>
-
-        </div>
+        <OutputTextarea message={decryptedString} />
     );
 
 }
@@ -231,4 +214,19 @@ const LoadMode = (props) => {
             <Decrypt numRails = {numRails} inputText = {inputText}/>
         );
     }
+}
+
+/* Renders the text area with encrypted/decrypted string  */
+const OutputTextarea = (props) => {
+    return (
+        <div>
+            <div>
+                <textarea className="inputOutput_textArea" id="output_textArea" value={props.message} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
+            </div>
+            <div>
+                <button onClick={copyToClipboard}>Copy Output</button> 
+            </div>
+
+        </div>
+    );
 }
