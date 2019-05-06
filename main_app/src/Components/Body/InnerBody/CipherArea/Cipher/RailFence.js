@@ -220,12 +220,12 @@ const LoadMode = (props) => {
 const OutputTextarea = (props) => {
     return (
         <div>
-            <div>
+            {/* <div> */}
                 <textarea className="inputOutput_textArea" id="output_textArea" value={props.message} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
-            </div>
-            <div>
-                <button onClick={copyToClipboard}>Copy Output</button> 
-            </div>
+            {/* </div> */}
+            {/* <div> */}
+                {/* <button onClick={copyToClipboard}>Copy Output</button>  */}
+            {/* </div> */}
 
         </div>
     );
