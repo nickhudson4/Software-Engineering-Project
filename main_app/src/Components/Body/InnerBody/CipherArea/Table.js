@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Cipher.css';
+import './CipherArea.css';
 class Table extends Component {
   render() {
     var numRows = this.props.numRows;

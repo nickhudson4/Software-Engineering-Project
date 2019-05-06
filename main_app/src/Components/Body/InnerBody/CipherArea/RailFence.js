@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Cipher.css';
+import './CipherArea.css';
 import Table from './Table';
 
 /*
@@ -19,7 +19,9 @@ class RailFence extends Component {
     constructor(props){
         super(props);
         this.state = {
-            railsInput: 3 //Defualt number of rails
+            railsInput: 3, //Defualt number of rails
+            inputText: 'none',
+            mode: 'none'
         }
     }
 
@@ -29,25 +31,44 @@ class RailFence extends Component {
 
         var isInput = false;
 
-        var inputText = this.props.inputText;
-        var mode = this.props.mode;
-        if (inputText === 'none' || inputText === ''){
-            isInput = false;
-        }
-        else {
-            isInput = true;
-        }
+        // if (inputText === 'none' || inputText === ''){
+        //     isInput = false;
+        // }
+        // else {
+        //     isInput = true;
+        // }
         return (
             <div id="railFence_div" className="specific_cipher_class">
+                <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Input" rows="25" cols="80"></textarea>
+                <br/>
+                <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
+                <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
+
+
                 <form>
                     Rails: 
                     <input id="rails_input" type="number" min="2" step="1" name="num_rails" value={this.state.railsInput} onChange={evt => this.updateRailsInput(evt)}></input>
                 </form>
                 <br/>
-                <LoadMode mode = {mode} numRails = {this.state.railsInput} inputText = {inputText}/>
+                <LoadMode mode = {this.state.mode} numRails = {this.state.railsInput} inputText = {this.state.inputText}/>
             </div>
         );
     }
+
+  encryptOnClick = () => {
+    var text = document.getElementById("input_textArea").value;  //Inputed text
+    this.setState({
+      inputText: text,
+      mode: 'encrypt'
+    })
+  }
+  decryptOnClick = () => {
+    var text = document.getElementById("input_textArea").value;  //Inputed text
+    this.setState({
+      inputText: text,
+      mode: 'decrypt'
+    })
+  }
 
     updateRailsInput(evt) { //Reload when number of rails is changed
         this.setState({
@@ -57,6 +78,8 @@ class RailFence extends Component {
 }
 
 export default RailFence;
+
+
 
 const Encrypt = (props) => {
     var inputText = props.inputText;
@@ -209,9 +232,14 @@ const LoadMode = (props) => {
             <Encrypt numRails = {numRails} inputText = {inputText}/>
         );
     }
-    else{
+    else if (mode === 'decrypt'){
         return (
             <Decrypt numRails = {numRails} inputText = {inputText}/>
+        );
+    }
+    else {
+        return (
+            <div></div>
         );
     }
 }
@@ -224,7 +252,7 @@ const OutputTextarea = (props) => {
                 <textarea className="inputOutput_textArea" id="output_textArea" value={props.message} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
             {/* </div> */}
             {/* <div> */}
-                {/* <button onClick={copyToClipboard}>Copy Output</button>  */}
+                <button onClick={copyToClipboard}>Copy Output</button> 
             {/* </div> */}
 
         </div>
