@@ -29,27 +29,21 @@ class RailFence extends Component {
 
     render() {
 
-        var isInput = false;
-
-        // if (inputText === 'none' || inputText === ''){
-        //     isInput = false;
-        // }
-        // else {
-        //     isInput = true;
-        // }
         return (
             <div id="railFence_div" className="specific_cipher_class">
-                <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Input" rows="25" cols="80"></textarea>
-                <br/>
-                <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
-                <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
+                <div id="input_textArea_div" className="input_text_area">
+                    <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Input" rows="25" cols="80"></textarea>
+                    <br/>
+                    <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
+                    <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
 
 
-                <form>
-                    Rails: 
-                    <input id="rails_input" type="number" min="2" step="1" name="num_rails" value={this.state.railsInput} onChange={evt => this.updateRailsInput(evt)}></input>
-                </form>
-                <br/>
+                    <form>
+                        Rails: 
+                        <input id="rails_input" type="number" min="2" step="1" name="num_rails" value={this.state.railsInput} onChange={evt => this.updateRailsInput(evt)}></input>
+                    </form>
+                    <br/>
+                </div>
                 <LoadMode mode = {this.state.mode} numRails = {this.state.railsInput} inputText = {this.state.inputText}/>
             </div>
         );
@@ -247,14 +241,9 @@ const LoadMode = (props) => {
 /* Renders the text area with encrypted/decrypted string  */
 const OutputTextarea = (props) => {
     return (
-        <div>
-            {/* <div> */}
-                <textarea className="inputOutput_textArea" id="output_textArea" value={props.message} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
-            {/* </div> */}
-            {/* <div> */}
-                <button onClick={copyToClipboard}>Copy Output</button> 
-            {/* </div> */}
-
+        <div id="output_textArea_div" className="output_text_area">
+            <textarea className="inputOutput_textArea" id="output_textArea" value={props.message} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
+            <button onClick={copyToClipboard}>Copy Output</button> 
         </div>
     );
 }

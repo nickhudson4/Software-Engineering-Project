@@ -1,7 +1,24 @@
 #railFence_div{
-    /* float: left; */
-    text-align: center;
+  /* float: left; */
+  text-align: center;
+  /* border: 1px solid black;  */ /* For debugging*/ 
+  /* padding: 20px, 300px, 0px, 0px;  */
+  padding-left: 300px;
+  /* padding-right: 300px; */
+  padding-top: 50px;
+  
+} 
+
+#input_textArea_div {
+  float: left;
+  text-align: center;
 }
+
+#output_textArea_div {
+  float: left;
+  text-align: center;
+}
+
 table {
     border-collapse: collapse;
   }
