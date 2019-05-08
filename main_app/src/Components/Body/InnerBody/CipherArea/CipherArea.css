@@ -9,6 +9,11 @@
   
 } 
 
+.inputOutput_textArea {
+  background-color: #282828;
+  border: 1px solid #20a0e5;
+}
+
 #input_textArea_div {
   /* float: left; */
   text-align: center;
@@ -19,6 +24,8 @@
   text-align: center;
   padding-left:90px;
 }
+
+
 
 table {
     border-collapse: collapse;
