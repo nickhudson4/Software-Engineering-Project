@@ -1,18 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2|Josefin+Sans'); /* Google font */ 
 
 #homeArea_div {
     padding-top: 300px;
 }
 
 #homeArea_h1 {
-    color: #20a0e5;
+    color: #00D0FF;
     padding-left: 220px;
     text-align: center;
+    font-family: 'Exo 2', sans-serif;
 }
 
 #homeArea_h4 {
-    color: #282828;
+    color: #FF00D0;
     padding-left: 220px;
     text-align: center;
+    font-family: 'Exo 2', sans-serif;
 }
 
 #aboutArea_div {
