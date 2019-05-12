@@ -27,10 +27,10 @@
 }
 
 /* The navigation menu links */
-#sideMenu_div button {
+#sideMenu_div h3 {
   text-align: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-decoration: none;
   font-size: 15px;
   font-family: 'Exo 2', sans-serif;
@@ -45,9 +45,9 @@
 }
 
 /* When you mouse over the navigation links, change their color */
-#sideMenu_div button:hover {
+#sideMenu_div h3:hover {
   color: #00D0FF;
-  border-left: 2px solid #00D0FF;
+  /* border-left: 2px solid #00D0FF; */
   background-color: #383838;
   
 }
@@ -59,10 +59,8 @@
   height: 50px;
 }
 
-#topMenu_div button {
-  line-height: 50px;
+#topMenu_div h3 {
   padding-left: 50px;
-  text-decoration: none;
   font-size: 15px;
   color: #363636;
   display: inline-block;
@@ -70,9 +68,6 @@
   font-family: 'Exo 2', sans-serif;
 
   /* Remove all default button properties */
-  text-decoration: none;
-  background: none;
-	border: none;
 	cursor: pointer;
   
 }

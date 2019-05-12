@@ -9,11 +9,20 @@
   
 } 
 
+.specific_cipher_class h1{
+  color: #FF00D0;
+}
+
 .inputOutput_textArea {
   background-color: #282828;
   border: 1px solid #20a0e5;
   color: wheat;
 }
+.specific_cipher_class button{
+  color: #20a0e5;
+  background-color: black;
+  border: 1px solid #20a0e5;
+} 
 
 #input_textArea_div {
   /* float: left; */

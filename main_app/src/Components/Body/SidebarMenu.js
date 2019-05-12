@@ -17,21 +17,21 @@ class SidebarMenu extends Component {
             {/* <Logo/> */}
 
             
-            <button onClick={() => this.props.onClickFunc("mono")}>Mono-Alphabetic Substitution</button>
-            <button onClick={() => this.props.onClickFunc("vig")}>Vigenre Cipher</button>
-            <button onClick={() => this.props.onClickFunc("scy")}>Scytale</button>
-            <button onClick={() => this.props.onClickFunc("rail")}>Rail Fence</button>
-            <button onClick={() => this.props.onClickFunc("col")}>Columnar</button>
-            <button onClick={() => this.props.onClickFunc("two")}>Two Square</button>
-            <button onClick={() => this.props.onClickFunc("four")}>Four Square</button>
-            <button onClick={() => this.props.onClickFunc("play")}>Playfair</button>
-            <button onClick={() => this.props.onClickFunc("adfgx")}>ADFGX</button>
-            <button onClick={() => this.props.onClickFunc("adfgvx")}>ADFGVX</button>
-            <button onClick={() => this.props.onClickFunc("lfsr")}>LFSR</button>
-            <button onClick={() => this.props.onClickFunc("hill")}>Hill</button>
-            <button onClick={() => this.props.onClickFunc("enig")}>Enigma Machine</button>
-            <button onClick={() => this.props.onClickFunc("rsa")}>RSA</button>
-            <button onClick={() => this.props.onClickFunc("elg")}>ElGamal</button>
+            <h3 onClick={() => this.props.onClickFunc("mono")}>Mono-Alphabetic Substitution</h3>
+            <h3 onClick={() => this.props.onClickFunc("vig")}>Vigenre Cipher</h3>
+            <h3 onClick={() => this.props.onClickFunc("scy")}>Scytale</h3>
+            <h3 onClick={() => this.props.onClickFunc("rail")}>Rail Fence</h3>
+            <h3 onClick={() => this.props.onClickFunc("col")}>Columnar</h3>
+            <h3 onClick={() => this.props.onClickFunc("two")}>Two Square</h3>
+            <h3 onClick={() => this.props.onClickFunc("four")}>Four Square</h3>
+            <h3 onClick={() => this.props.onClickFunc("play")}>Playfair</h3>
+            <h3 onClick={() => this.props.onClickFunc("adfgx")}>ADFGX</h3>
+            <h3 onClick={() => this.props.onClickFunc("adfgvx")}>ADFGVX</h3>
+            <h3 onClick={() => this.props.onClickFunc("lfsr")}>LFSR</h3>
+            <h3 onClick={() => this.props.onClickFunc("hill")}>Hill</h3>
+            <h3 onClick={() => this.props.onClickFunc("enig")}>Enigma Machine</h3>
+            <h3 onClick={() => this.props.onClickFunc("rsa")}>RSA</h3>
+            <h3 onClick={() => this.props.onClickFunc("elg")}>ElGamal</h3>
 
         </div>
     );
