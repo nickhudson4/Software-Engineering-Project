@@ -34,16 +34,17 @@ class RailFence extends Component {
                 <h1>Rail Fence</h1>
                 <div id="input_textArea_div" className="input_text_area">
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Input" rows="25" cols="80"></textarea>
-                    <br/>
-                    <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
-                    <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
+                    {/* <br/> */}
+                    <div id="actions_div_id" className="actions_div">
+                        <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
+                        <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
+
+                        <form className="textBox_form">
+                            Rails: <input id="rails_input" className="input_textBox" type="number" min="2" step="1" name="num_rails" value={this.state.railsInput} onChange={evt => this.updateRailsInput(evt)}></input>
+                        </form>
+                    </div>
 
 
-                    <form>
-                        Rails: 
-                        <input id="rails_input" type="number" min="2" step="1" name="num_rails" value={this.state.railsInput} onChange={evt => this.updateRailsInput(evt)}></input>
-                    </form>
-                    <br/>
                 </div>
                 <LoadMode mode = {this.state.mode} numRails = {this.state.railsInput} inputText = {this.state.inputText}/>
             </div>
@@ -244,7 +245,7 @@ const OutputTextarea = (props) => {
     return (
         <div id="output_textArea_div" className="output_text_area">
             <textarea className="inputOutput_textArea" id="output_textArea" value={props.message} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
-            <button onClick={copyToClipboard}>Copy Output</button> 
+            <button onClick={copyToClipboard}>Copy <br/> Output</button> 
         </div>
     );
 }
