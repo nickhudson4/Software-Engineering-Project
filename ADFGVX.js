@@ -26,10 +26,6 @@ export var adfgvx = (function () {
     adfgvx.search = function(search){
       //Whatever is passed into this function is now our "target"
       target = search;
-      //We create our 6x6 matrix, with the keyword "hello"
-      adfgvx.createThings("hello");
-
-      //(Both need error checking)
 
       //We filter through the input and set our x value
       if (search[1] === 'A')
@@ -178,6 +174,14 @@ export var adfgvx = (function () {
   }
   return myarr;
 }
+
+
+  adfgvx.start = function(keyword, terms){
+    adfgvx.createThings(keyword);
+    var temp = adfgvx.search(terms);
+    return temp;
+  }
+
 
 
     adfgvx.main = function (args) {
