@@ -6,7 +6,7 @@ export var adfgvx = (function () {
     function adfgvx() {
     }
     //We declare an array which is just the alphabet    
-    var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    var alphabet = ['a','b','c','d','e','f','g','h','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
     //Declare an array of numbers 1-9
     var numbers = ['0','1','2','3','4','5','6','7','8','9'];
     //This is our 2d matrix
@@ -20,6 +20,111 @@ export var adfgvx = (function () {
     var target;
     //Our keyword used
     var kword;
+
+    var encryptionWord;
+    adfgvx.eWord = function(){
+      return encryptionWord;
+    }
+    var decryptionWord;
+    adfgvx.dWord = function(){
+      return decryptionWord;
+    }
+
+    var x1;
+    var x2;
+    var y1;
+    var y2;
+
+
+    let inputPair = [2];
+    let outputPair = [];
+    let searchPair = [2];
+    let codedArray = [];
+    let decodedArray = [];
+    var arraySize = 0;
+    var arraySize2 = 0;
+
+
+  //Returns the keyword used in the matrix
+  adfgvx.keyword = function(){
+    return kword;
+  }
+
+  //Returns the 2 target letters entered to search
+  adfgvx.searchValue = function(){
+    return target;
+  }
+
+  //Filters through for i
+  adfgvx.filter = function(word){
+    let buff = []
+    for (let i=0; i < word.length; ++i){
+      if (word[i] === 'i'){
+        buff[i] = 'j';
+      }
+      else{
+        buff[i] = word[i];
+      }
+    }
+      return buff;
+  }
+
+  adfgvx.decryptMessage = function (){
+      decodedArray[arraySize2] = adfgvx.search(inputPair);
+      ++arraySize2;
+  }
+
+  adfgvx.decrypt = function(word){
+    decryptionWord = word;
+    for(let i = 0; i < word.length; i = i + 2){
+      inputPair[0] = word[i];
+      inputPair[1] = word[i+1];
+      adfgvx.decryptMessage();
+    }
+    return decodedArray;
+  }
+
+    adfgvx.encryptMessage = function(){
+    var truth = 0;
+
+    for(let i = 0; i < 6; ++i)
+    {
+      for(let j = 0; j < 6; ++j)
+      {
+        if (searchPair[0] === myarr[j][i] && truth < 1)
+        {
+            x = i;
+            y = j;
+            adfgvx.pushMessage();
+            ++truth;
+        }
+      }
+    }
+  }
+
+  adfgvx.encrypt = function(word){
+  if(word.length % 2 != 0)
+  {
+    word = word + 'x';
+  }
+  encryptionWord = word;
+  for(let i = 0; i < word.length; ++i)
+  {
+      searchPair[0] = word[i];
+      adfgvx.encryptMessage();
+  }
+
+    return codedArray;
+  }
+
+
+
+  adfgvx.start = function(keyword, terms){
+    adfgvx.createThings(keyword);
+    var temp = adfgvx.search(terms);
+   // return temp;
+  }
+
 
 
     //The function for searching through our matrix
@@ -83,29 +188,64 @@ export var adfgvx = (function () {
     return(myarr[x][y])
   }
 
-  //Returns the keyword used in the matrix
-  adfgvx.keyword = function(){
-  return kword;
+
+  adfgvx.newArray1 = function(){
+    let array = [];
+    var truth = 0;
+
+  for (let t=0; t < alphabet.length; ++t){
+    truth = 0;
+    for (let j=0; j < kword.length; ++j){
+        if (alphabet[t] === kword[j]){
+          truth = 1;
+        }
+    }
+    
+    if (truth != 1){
+      array.push(alphabet[t]);
+    }
   }
-  //Returns the 2 target letters entered to search
-  adfgvx.searchValue = function(){
-  return target;
+  return array;
+}
+
+
+  adfgvx.newArray2 = function(){
+    let array = [];
+    var truth = 0;
+
+  for (let t=0; t < numbers.length; ++t){
+    truth = 0;
+    for (let j=0; j < kword.length; ++j){
+        if (numbers[t] === kword[j]){
+          truth = 1;
+        }
+    }
+    
+    if (truth != 1){
+      array.push(numbers[t]);
+    }
   }
+  return array;
+}
+
+
 
   adfgvx.createThings = function(keyword){
   //Sets our keyword value
-  kword = keyword;
+  kword = adfgvx.filter(keyword);
+  var tempArr1 = adfgvx.newArray1();
+  var tempArr2 = adfgvx.newArray2();
   var temp1 = 0;
   var temp2 = 0;
   var temp3 = 0;
   var truth = 0;
 
   //Outer loop
-  for(let a=0; a <= 6; a++){
+  for(let a=0; a < 6; a++){
     //Declares an array, named row
     let row = []
     //Inner loop
-    for(let b=0; b <= 6; b++){
+    for(let b=0; b < 6; b++){
       var col;
       truth = 0;
       //Our first if statement inputs our keyword into our matrix
@@ -113,41 +253,17 @@ export var adfgvx = (function () {
       {
         truth = 0;
         col = keyword[temp1];
-        for(let i=0; i < temp1 && truth === 0; ++i)
-        {
-         //Omits the letter i and checks for any duplicate letters in our keyword
-         if (keyword[temp1] === keyword[i] || keyword[temp1] === 'i')
-          {
-            while (keyword[temp1] === keyword[i] || keyword[temp1] === 'i' || keyword[temp1] === keyword[temp1-1])
-            {
-              ++temp1;
-            }
-            col = keyword[temp1];
-            truth = 1;
-          }
-        }
-        ++temp1;
+        temp1++;
       }
       //Second if statement inputs our alphabet into our matrix
-      else if (temp2 <= alphabet.length)
-      {
-        col = alphabet[temp2];
-        truth = 0;
-        for(let i=0; i < keyword.length && truth === 0; ++i){
-          //We check to see if any of the letters match any that were input by the keyword.
-          if (alphabet[temp2] === keyword[i] && temp2 < 26)
-          {
-            ++temp2;
-            col = alphabet[temp2];
-            truth = 1;
-          }
-        }
+      else if (temp2 < tempArr1.length){
+        col = tempArr1[temp2];
         ++temp2;
       }
       //Else we input our numbers 0-9
       else
       {
-        col = numbers[temp3]
+        col = tempArr2[temp3]
         ++temp3;
       }
       //Insert our value into our array
@@ -159,6 +275,66 @@ export var adfgvx = (function () {
   //Returns the matrix
   return myarr;
 }
+  
+  adfgvx.pushMessage = function(){
+      if (x === 0)
+      {
+        outputPair[1] = 'A';
+      }
+      else if (x === 1)
+      {
+        outputPair[1] = 'D';
+      }
+      else if (x === 2)
+      {
+        outputPair[1] = 'F';
+      }
+      else if (x === 3)
+      {
+        outputPair[1] = 'G';
+      }
+      else if (x === 4)
+      {
+        outputPair[1] = 'V';
+      }
+      else if (x === 5)
+      {
+        outputPair[1] = 'X';
+      }
+
+      if (y === 0)
+      {
+        outputPair[0] = 'A';
+      }
+      else if (y === 1)
+      {
+        outputPair[0] = 'D';
+      }
+      else if (y === 2)
+      {
+        outputPair[0] = 'F';
+      }
+      else if (y === 3)
+      {
+        outputPair[0] = 'G';
+      }
+      else if (y === 4)
+      {
+        outputPair[0] = 'V';
+      }
+      else if (y === 5)
+      {
+        outputPair[0] = 'X';
+      }
+
+
+    codedArray[arraySize] = outputPair[0];
+    ++arraySize;
+    codedArray[arraySize] = outputPair[1];
+    ++arraySize;
+    codedArray[arraySize] = ' ';
+    ++arraySize;
+  }
 
 
   //Not used, just an example of how to create a matrix
@@ -174,15 +350,6 @@ export var adfgvx = (function () {
   }
   return myarr;
 }
-
-
-  adfgvx.start = function(keyword, terms){
-    adfgvx.createThings(keyword);
-    var temp = adfgvx.search(terms);
-    return temp;
-  }
-
-
 
     adfgvx.main = function (args) {
     };

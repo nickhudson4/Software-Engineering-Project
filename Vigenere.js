@@ -1,83 +1,151 @@
-export var GFG = (function () {
+//TwoSquare.js file
 
-    function GFG() {
+//twosquare class declaration
+export var vigenere = (function () {
+
+    function vigenere() {
     }
-    
-    GFG.generateKey = function (str, key) {
-        var x = str.length;
-        for (var i = 0;; i++) {
-            {
-                if (x === i)
-                    i = 0;
-                if (key.length === str.length)
-                    break;
-                key += (key.charAt(i));
-            }
-            ;
+
+    //Our alphabet for setting our matricies, i is omitted    
+    var alphabet = ['a','b','c','d','e','f','g','h', 'i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    //Our 2 matricies used for 2 tSquare
+    let myarr = [];
+    let codedArray = [];
+    let decodedArray = [];
+    let tempArray = [];
+    let outputPair = [2];
+
+    //Calculated x coordinate of first matrix
+    let xArray = [];
+    let arrayX = [];
+    let yArray = [];
+    let arrayY = [];
+    //Calculated y coordinate of first matrix
+    var xx;
+    var yy;
+    //Desired search value
+    var target;
+    //The keyword in our first matrix
+    var keyword = 'keyword';
+    var keystream;
+
+    //Returns the keyword of our first matrix
+    vigenere.keywordf = function(){
+    return keyword;
+    }
+
+    var encryptionWord;
+    vigenere.eWord = function(){
+      return encryptionWord;
+    }
+
+
+    vigenere.encrypt = function(word){
+      vigenere.coordinate(word);
+      encryptionWord = word;
+      for(let i = 0; i < xArray.length; ++i)
+      {
+        var x = xArray[i];
+        var y = yArray[i];
+        codedArray.push(vigenere.search(x,y))
+      }
+
+    return codedArray;
+  }
+
+
+
+    vigenere.start = function(){
+      vigenere.setMatrix();
+      var temp = vigenere.search(19,7);
+      //return temp;
+    }
+
+
+
+
+  vigenere.coordinate = function(word){
+      if (keyword.length < word.length){
+        keystream = keyword;
+        var temp = 0;
+        for (let i = keyword.length; i < word.length; ++i){
+          keystream = keystream + keyword[temp];
+          if (temp > keyword.length){
+            temp = 0;
+          }
+          ++temp;
         }
-        return key;
-    };
+      }
+      else{
+        keystream = keyword;
+      }
 
-    GFG.cipherText = function (str, key) {
-        var cipher_text = "";
-        for (var i = 0; i < str.length; i++) {
+      for(let i=0; i < word.length; ++i){
+        xArray[i] = word[i].charCodeAt(0) - 97;
+        yArray[i] = keystream[i].charCodeAt(0) - 97;
+      }
+  }
+
+
+  vigenere.search = function(x, y){
+    return myarr[x][y];
+  }
+
+
+
+    //Determines coordinates based on the input 2 letters from the message
+    vigenere.coord = function(letter)
+    {
+      for(let i=0; i < 26; ++i)
+        {
+          for(let j=0; j < 26; ++j)
+          {
+            if (myarr[i][j] === letter)
             {
-                var x = ((function (c) { return c.charCodeAt == null ? c : c.charCodeAt(0); })(str.charAt(i)) + (function (c) { return c.charCodeAt == null ? c : c.charCodeAt(0); })(key.charAt(i))) % 26;
-                x += ('A').charCodeAt(0);
-                cipher_text += String.fromCharCode((x));
+              //x=i;
+              //y=j;
             }
-            ;
+          }
         }
-        return cipher_text;
+      }
+
+
+
+
+
+  vigenere.setMatrix = function(){
+  //Outer loop
+  var offset = 0;
+  var temp;
+  for(let a=0; a < 26; a++){
+    //Declares an array, named row
+    let row = []
+    //Inner loop
+    temp = 0;
+    for(let b=0; b < 26; b++){
+      //Insert our value into our array
+      if (b + offset < 26){
+        row.push(alphabet[b+offset]);
+      }
+      if (b + offset > 26){
+        row.push(alphabet[temp])
+        ++temp;
+      }
+
+    }
+    ++offset;
+    //Insert that array into an array of arrays
+    myarr.push(row);
+  }
+  //Returns the matrix
+  return myarr;
+}
+
+
+    vigenere.main = function (args) {
     };
-
-
-    GFG.originalText = function (cipher_text, key) {
-        var orig_text = "";
-        for (var i = 0; i < cipher_text.length && i < key.length; i++) {
-            {
-                var x = ((function (c) { return c.charCodeAt == null ? c : c.charCodeAt(0); })(cipher_text.charAt(i)) - (function (c) { return c.charCodeAt == null ? c : c.charCodeAt(0); })(key.charAt(i)) + 26) % 26;
-                x += ('A').charCodeAt(0);
-                orig_text += String.fromCharCode((x));
-            }
-            ;
-        }
-        return orig_text;
-    };
-
-
-     GFG.ciText = function (str) {
-        var keyword = "AYUSH";
-        var key = GFG.generateKey(str, keyword);
-        var ctext = GFG.cipherText(str, key);
-        return ctext;
-      };
-
-
-      GFG.ciKey = function (str) {
-        var keyword = "AYUSH";
-        var key = GFG.generateKey(str, keyword);
-        return key;
-      };
-
-       GFG.ciKeyword = function (str) {
-        var keyword = "AYUSH";
-        return keyword;
-      };
-
-
-
-
-    GFG.main = function (args) {
-        var str = "GEEKSFORGEEKS";
-        var keyword = "AYUSH";
-        var key = GFG.generateKey(str, keyword);
-        var cipher_text = GFG.cipherText(str, key);
-        console.info("Ciphertext : " + cipher_text + "\n");
-        console.info("Original/Decrypted Text : " + GFG.originalText(cipher_text, key));
-    };
-    return GFG;
+    return vigenere;
 }());
 
-GFG["__class"] = "GFG";
-GFG.main(null);
+vigenere["__class"] = "vigenere";
+vigenere.main(null);

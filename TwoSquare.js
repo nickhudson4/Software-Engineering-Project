@@ -11,6 +11,9 @@ export var twosquare = (function () {
     //Our 2 matricies used for 2 tSquare
     let myarr1 = [];
     let myarr2 = [];
+    let codedArray = [];
+    let decodedArray = [];
+    let outputPair = [2];
 
     //Calculated x coordinate of first matrix
     var x1;
@@ -26,6 +29,7 @@ export var twosquare = (function () {
     var keyword1 = 'math';
     //The keyword in our second matrix
     var keyword2 = 'cid';
+    var kword;
 
     //Returns the keyword of our first matrix
     twosquare.keyword1f = function(){
@@ -35,21 +39,52 @@ export var twosquare = (function () {
     twosquare.keyword2f = function(){
     return keyword2;
     }
-    //Creates both of our matricies
-    twosquare.encryptMessage = function(){
+
+    var encryptionWord;
+    twosquare.eWord = function(){
+      return encryptionWord;
+    }
+
+
+
+
+  twosquare.encrypt = function(word){
+  let searchPair = [];
+
+  if(word.length % 2 != 0)
+  {
+    word = word + 'x';
+  }
+  encryptionWord = word;
+  for(let i = 0; i < word.length; ++i, ++i)
+  {
+      searchPair[0] = word[i];
+      searchPair[1] = word[i+1];
+      twosquare.coord(searchPair);
+      var temp = twosquare.letterPair();
+      codedArray.push(temp);
+  }
+
+    return codedArray;
+  }
+
+
+    twosquare.start = function(){
       twosquare.setMatrix1(keyword1);
       twosquare.setMatrix2(keyword2);
-    //Returns the second matrix
-    return myarr2;
+      twosquare.coord("cy")
+      var temp = twosquare.letterPair();
+      //return temp;
     }
+
 
 
     //Determines coordinates based on the input 2 letters from the message
     twosquare.coord = function(pair)
     {
-      for(let i=0; i<=5; ++i)
+      for(let i=0; i < 5; ++i)
         {
-          for(let j=0; j<=5; ++j)
+          for(let j=0; j < 5; ++j)
           {
             if (myarr1[i][j] === pair[0])
             {
@@ -66,13 +101,16 @@ export var twosquare = (function () {
       }
 
 
+
     //Returns the input search pair
     twosquare.letterPair = function(){
       let pair = [2];
-      pair[0] = myarr1[x1][y2];
-      pair[1] = myarr2[x2][y1];
+      pair[0] = myarr1[x2][y1];
+      pair[1] = myarr2[x1][y2];
       return pair;
     }
+
+
     //Returns our first matrix
     twosquare.first = function()
     {
@@ -85,123 +123,137 @@ export var twosquare = (function () {
     }
 
 
-
-    //Creates our first matrix
-    twosquare.setMatrix1 = function(keyword){
-    var temp1 = 0;
-    var temp2 = 0;
-    var truth = 0;
-
-    //Outer loop
-    for(let a=0; a <= 5; a++){
-      //Creates an array
-      let row = []
-      //Inner loop
-      for(let b=0; b <= 5; b++){
-        //Temp variable
-        var col;
-        truth = 0;
-        //Inserts the keyword
-        if (temp1 < keyword.length)
-        {
-          col = keyword[temp1];
-          truth = 0;
-          for(let i=0; i < temp1 && truth === 0; ++i)
-          {
-            //Checks for duplicates
-            if (keyword[temp1] === keyword[i] || keyword[temp1] === 'i')
-            {
-              while (keyword[temp1] === keyword[i] || keyword[temp1] === 'i' || keyword[temp1] === keyword[temp1-1])
-              {
-                ++temp1;
-              }
-              col = keyword[temp1];
-              truth = 1;
-            }
-          }
-          ++temp1;
-        }
-        //Inserts the alphabet
-        else
-        {
-          col = alphabet[temp2];
-          truth = 0;
-          for(let i=0; i < keyword.length && truth === 0; ++i){
-            //Checks for duplicates between keyword 1 and alphabet
-            if (alphabet[temp2] === keyword[i] && temp2 < 25)
-            {
-              ++temp2;
-              col = alphabet[temp2];
-              truth = 1;
-            }
-          }
-          ++temp2;
-        }
-        //Insert desired value into array
-        row.push(col);
+  //Filters through for i
+  twosquare.filter = function(word){
+    let buff = []
+    for (let i=0; i < word.length; ++i){
+      if (word[i] === 'i'){
+        buff[i] = 'j';
       }
-      //Inserts array into matrix
-      myarr1.push(row);
+      else{
+        buff[i] = word[i];
+      }
     }
-    //Returns matrix
-    return myarr1;
+      return buff;
   }
 
-    //Generates second matrix
-    twosquare.setMatrix2 = function(keyword){
-    var temp1 = 0;
-    var temp2 = 0;
-    var truth = 0;
 
-    //Outer loop
-    for(let a=0; a <= 5; a++){
-      //Creates an array
-      let row = []
-      //Inner loop
-      for(let b=0; b <= 5; b++){
-        var col;
-        truth = 0;
-        //Inserts keyword
-        if (temp1 < keyword.length)
-        {
-          col = keyword[temp1];
-          truth = 0;
-          for(let i=0; i < temp1 && truth === 0; ++i)
-          {
-            //Checks for duplicates
-            if (keyword[temp1] === keyword[i] || keyword[temp1] === 'i')
-            {
-              while (keyword[temp1] === keyword[i] || keyword[temp1] === 'i' || keyword[temp1] === keyword[temp1-1])
-              {
-                ++temp1;
-              }
-              col = keyword[temp1];
-              truth = 1;
-            }
-          }
-          ++temp1;
+
+  twosquare.newArray1 = function(word){
+    let array = [];
+    var truth;
+
+  for (let t=0; t < alphabet.length; ++t){
+    truth = 0;
+    for (let j=0; j < kword.length; ++j){
+        if (alphabet[t] === kword[j]){
+          truth = 1;
         }
-        //Inserts alphabet
-        else
-        {
-          col = alphabet[temp2];
-          truth = 0;
-          for(let i=0; i < keyword.length && truth === 0; ++i){
-            //Checks for duplicates
-            if (alphabet[temp2] === keyword[i] && temp2 < 25)
-            {
-              ++temp2;
-              col = alphabet[temp2];
-              truth = 1;
-            }
-          }
-          ++temp2;
-        }
-        row.push(col);
-      }
-      myarr2.push(row);
     }
-    return myarr2;
+    
+    if (truth != 1){
+      array.push(alphabet[t]);
+    }
+  }
+  return array;
+}
+
+
+
+
+
+  twosquare.setMatrix1 = function(){
+  //Sets our keyword value
+  var keyword = twosquare.filter(keyword1);
+  kword = keyword;
+  var tempArr1 = twosquare.newArray1();
+  var temp1 = 0;
+  var temp2 = 0;
+  var temp3 = 0;
+  var truth = 0;
+
+  //Outer loop
+  for(let a=0; a < 5; a++){
+    //Declares an array, named row
+    let row = []
+    //Inner loop
+    for(let b=0; b < 5; b++){
+      var col;
+      truth = 0;
+      //Our first if statement inputs our keyword into our matrix
+      if (temp1 < keyword.length)
+      {
+        truth = 0;
+        col = keyword[temp1];
+        temp1++;
+      }
+      //Second if statement inputs our alphabet into our matrix
+      else if (temp2 < tempArr1.length){
+        col = tempArr1[temp2];
+        ++temp2;
+      }
+      //Else we input our numbers 0-9
+      else
+      {
+        col = tempArr1[temp3];
+        ++temp3;
+      }
+      //Insert our value into our array
+      row.push(col);
+    }
+    //Insert that array into an array of arrays
+    myarr1.push(row);
+  }
+  //Returns the matrix
+  return myarr1;
+}
+
+
+    //Generates second matrix
+  twosquare.setMatrix2 = function(){
+    //Sets our keyword value
+  var keyword = twosquare.filter(keyword2);
+  kword = keyword;
+  var tempArr2 = twosquare.newArray1();
+  var temp1 = 0;
+  var temp2 = 0;
+  var temp3 = 0;
+  var truth = 0;
+
+  //Outer loop
+  for(let a=0; a < 5; a++){
+    //Declares an array, named row
+    let row = []
+    //Inner loop
+    for(let b=0; b < 5; b++){
+      var col;
+      truth = 0;
+      //Our first if statement inputs our keyword into our matrix
+      if (temp1 < keyword.length)
+      {
+        truth = 0;
+        col = keyword[temp1];
+        temp1++;
+      }
+      //Second if statement inputs our alphabet into our matrix
+      else if (temp2 < tempArr2.length){
+        col = tempArr2[temp2];
+        ++temp2;
+      }
+      //Else we input our numbers 0-9
+      else
+      {
+        col = tempArr2[temp3]
+        ++temp3;
+      }
+      //Insert our value into our array
+      row.push(col);
+    }
+    //Insert that array into an array of arrays
+    myarr2.push(row);
+  }
+  //Returns the matrix
+  return myarr2;
   }
 
 

@@ -1,32 +1,147 @@
-//ADFGX.js file (Incomplete)
+//ADFGVX.js file (Not Completed)
 
-  //Declartion of class
-  export var adfgx = (function () {
+//Declaring our class
+export var adfgx = (function () {
 
     function adfgx() {
     }
-    
-    //Alphabet array we use in our matrix, i is omitted
+    //We declare an array which is just the alphabet    
     var alphabet = ['a','b','c','d','e','f','g','h','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    //Our 5x5 matrix
+    //Declare an array of numbers 1-9
+    var numbers = ['0','1','2','3','4','5','6','7','8','9'];
+    //This is our 2d matrix
     let myarr = [];
-    //Our x variable in our matrix
+    //The x coordinate in the matrix
     var x;
-    //Our y variable in our matrix
+    //The y coordinate in the matrix
     var y;
-    //The word that we are trying to search for
+    //The 2 letters that the user puts in to search the matrix
+    //Must be caps
     var target;
-    //Our keyword
+    //Our keyword used
     var kword;
 
-    //Searches through our matrix using coordinates
-    adfgx.search = function(search)
+    var x1;
+    var x2;
+    var y1;
+    var y2;
+
+
+    let inputPair = [2];
+    let outputPair = [];
+    let searchPair = [2];
+    let codedArray = [];
+    let decodedArray = [];
+    var arraySize = 0;
+    var arraySize2 = 0;
+
+
+
+    var encryptionWord;
+    adfgx.eWord = function(){
+      return encryptionWord;
+    }
+    var decryptionWord;
+    adfgx.dWord = function(){
+      return decryptionWord;
+    }
+
+
+
+
+
+  //Returns the keyword used in the matrix
+  adfgx.keyword = function(){
+    return kword;
+  }
+
+  //Returns the 2 target letters entered to search
+  adfgx.searchValue = function(){
+    return target;
+  }
+
+  //Filters through for i
+  adfgx.filter = function(word){
+    let buff = []
+    for (let i=0; i < word.length; ++i){
+      if (word[i] === 'i'){
+        buff[i] = 'j';
+      }
+      else{
+        buff[i] = word[i];
+      }
+    }
+      return buff;
+  }
+
+  adfgx.decryptMessage = function (){
+      decodedArray[arraySize2] = adfgx.search(inputPair);
+      ++arraySize2;
+  }
+
+  adfgx.decrypt = function(word){
+    decryptionWord = word;
+    for(let i = 0; i < word.length; i = i + 2){
+      inputPair[0] = word[i];
+      inputPair[1] = word[i+1];
+      adfgx.decryptMessage();
+    }
+    return decodedArray;
+  }
+
+
+
+    adfgx.encryptMessage = function(){
+    var truth = 0;
+
+    for(let i = 0; i < 5; ++i)
     {
-      //Sets our 2 letter search input from user
+      var a = i;
+      for(let j = 0; j < 5; ++j)
+      {
+        var b = j;
+        if (searchPair[0] === myarr[j][i] && truth < 1)
+        {
+            x = i;
+            y = j;
+            adfgx.pushMessage();
+            ++truth;
+        }
+      }
+    }
+  }
+
+
+  adfgx.encrypt = function(word){
+    if  (word.length % 2 != 0)
+    {
+      word = word + 'x';
+    }
+    encryptionWord = word;
+    for (let i = 0; i < word.length; ++i)
+    {
+      searchPair[0] = word[i];
+      adfgx.encryptMessage();
+    }
+    return codedArray;
+  }
+
+
+
+  adfgx.start = function(keyword, terms){
+    adfgx.createThings(keyword);
+    var temp = adfgx.search(terms);
+    //return temp;
+  }
+
+
+
+    //The function for searching through our matrix
+    adfgx.search = function(search){
+      //Whatever is passed into this function is now our "target"
       target = search;
-      //Creates a matrix with keyword "hello"
-      adfgx.createThings("hello");
-      //Checks for the x coordinate of the user input
+
+      //We filter through the input and set our x value
       if (search[1] === 'A')
       {
         x = 0;
@@ -47,7 +162,8 @@
       {
         x = 4;
       }
-      //Checks for the y coordinate of the user input
+
+      //We filter through the input and set our y value
       if (search[0] === 'A')
       {
         y = 0;
@@ -68,83 +184,128 @@
       {
         y = 4;
       }
-    //Returns the character at the desired location
+
+    //We return the letter which cooresponds to our search coordinates
     return(myarr[x][y])
+  }
+
+
+  adfgx.newArray1 = function(){
+    let array = [];
+    var truth = 0;
+
+  for (let t=0; t < alphabet.length; ++t){
+    truth = 0;
+    for (let j=0; j < kword.length; ++j){
+        if (alphabet[t] === kword[j]){
+          truth = 1;
+        }
+    }
+    
+    if (truth != 1){
+      array.push(alphabet[t]);
+    }
+  }
+  return array;
 }
 
-//Returns the keyword used in the matrix
-adfgx.keyword = function(){
-return kword;
-}
 
-//Returns the input search searchValue
-adfgx.searchValue = function(){
-return target;
-}
 
-//Generates our 5x5 matrix
-adfgx.createThings = function(keyword){
-//Sets our keyword for global use
-kword = keyword;
-var temp1 = 0;
-var temp2 = 0;
-var truth = 0;
-//Outer loop
-for(let a=0; a <= 5; a++){
-  //Declares an array called row
-  let row = []
-  //Inner loop
-  for(let b=0; b <= 5; b++){
+
+  adfgx.createThings = function(keyword){
+  //Sets our keyword value
+  kword = adfgx.filter(keyword);
+  var tempArr1 = adfgx.newArray1();
+  var temp1 = 0;
+  var temp2 = 0;
+  var truth;
+
+  //Outer loop
+  for(let a=0; a < 5; a++){
+    //Declares an array, named row
+    let row = []
+    //Inner loop
+    for(let b=0; b < 5; b++){
       var col;
       truth = 0;
-      //Sets the keyword in our matrix
+      //Our first if statement inputs our keyword into our matrix
       if (temp1 < keyword.length)
       {
+        truth = 0;
         col = keyword[temp1];
-        truth = 0;
-        for(let i=0; i < temp1 && truth === 0; ++i)
-        {
-          //Checks for any duplicates
-          if (keyword[temp1] === keyword[i] || keyword[temp1] === 'i')
-          {
-            while (keyword[temp1] === keyword[i] || keyword[temp1] === 'i' || keyword[temp1] === keyword[temp1-1])
-            {
-              ++temp1;
-            }
-            col = keyword[temp1];
-            truth = 1;
-          }
-        }
-        ++temp1;
+        temp1++;
       }
-      //Sets the alphabet in our matrix
-      else
-      {
-        col = alphabet[temp2];
-        truth = 0;
-        for(let i=0; i < keyword.length && truth === 0; ++i){
-          //Checks for duplicates between the alphabet and the keyword
-          if (alphabet[temp2] === keyword[i] && temp2 < 25)
-          {
-            ++temp2;
-            col = alphabet[temp2];
-            truth = 1;
-          }
-        }
+      //Second if statement inputs our alphabet into our matrix
+      else if (temp2 < tempArr1.length){
+        col = tempArr1[temp2];
         ++temp2;
       }
-      //adds the desired value into the array
+      //Insert our value into our array
       row.push(col);
     }
-    //adds the array into an array of arrays/matrix
+    //Insert that array into an array of arrays
     myarr.push(row);
   }
   //Returns the matrix
   return myarr;
 }
+  
 
 
-  //Not used, example on how to generate a matrix
+  adfgx.pushMessage = function(){
+      if (x === 0)
+      {
+        outputPair[1] = 'A';
+      }
+      else if (x === 1)
+      {
+        outputPair[1] = 'D';
+      }
+      else if (x === 2)
+      {
+        outputPair[1] = 'F';
+      }
+      else if (x === 3)
+      {
+        outputPair[1] = 'G';
+      }
+      else if (x === 4)
+      {
+        outputPair[1] = 'X';
+      }
+
+      if (y === 0)
+      {
+        outputPair[0] = 'A';
+      }
+      else if (y === 1)
+      {
+        outputPair[0] = 'D';
+      }
+      else if (y === 2)
+      {
+        outputPair[0] = 'F';
+      }
+      else if (y === 3)
+      {
+        outputPair[0] = 'G';
+      }
+      else if (y === 4)
+      {
+        outputPair[0] = 'X';
+      }
+
+
+    codedArray[arraySize] = outputPair[0];
+    ++arraySize;
+    codedArray[arraySize] = outputPair[1];
+    ++arraySize;
+    codedArray[arraySize] = ' ';
+    ++arraySize;
+  }
+
+
+  //Not used, just an example of how to create a matrix
   adfgx.generateMatrix = function(rowCount, colCount){
   let myarr = []
   for(let i=0; i < rowCount; i++){
@@ -158,10 +319,9 @@ for(let a=0; a <= 5; a++){
   return myarr;
 }
 
-
     adfgx.main = function (args) {
     };
-    return adfgx;
+    return adfgx;    
 }());
 
 adfgx["__class"] = "adfgx";
