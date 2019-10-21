@@ -1,13 +1,83 @@
 //reADFGVX.js file (Not Completed)
-//Encryption is done
-//Need to add filter function for I for plaintext
-//Need to make sure to convert to to to lower case
-//Need to add a length checker for plaintext
+//More Comments
+//Input Message Error Check
 
 //Declaring our class
 export var readfgx = (function () {
     function readfgx() {
     }
+
+
+    readfgx.duplicateChecker = function (keysquare){
+      var truth = 0;
+
+      for (let i = 0; i < keysquare.length && truth == 0; ++i){
+        for (let j = i+1; j < keysquare.length && truth == 0; ++j){
+          if (keysquare[i] == keysquare[j]){
+              truth = 1;
+          }
+        }
+      }
+      return truth;
+    }
+
+
+    //This function removes j from a keysquare
+    readfgx.jRemover = function(square){
+      var keysquare = square.toLowerCase();
+      let buff = []
+      var truth = 0;
+
+      //This part checks the keysquare for j
+      for (let i = 0; i < keysquare.length && truth != 2; ++i){
+        if (keysquare[i] == 'j'){
+              truth = 1;
+        }
+        if (truth == 0){
+            buff[i] = keysquare[i];
+        }
+        if (truth == 1){
+            buff[i] = keysquare[i+1];
+            if (i == 24){
+              truth = 2;
+            }
+        }
+      }
+      return buff;
+    }
+
+
+    //This function replaces i with j in any encryption message
+    readfgx.iAdder = function (input){
+      var message = input.toLowerCase();
+      let buff = [];
+      for (let i = 0; i < message.length; ++i){
+        if (message[i] == 'j'){
+          buff[i] = 'i';
+        }
+        else{
+          buff[i] = message[i];
+        }
+      }
+
+      return buff;
+    }
+
+
+    //This functions runs other functions to filter out anything that might cause errors
+    readfgx.filter = function(keysquare){
+      var newKeysquare = readfgx.jRemover(keysquare);
+
+      if (newKeysquare.length != 25){
+        return "Invalid Amount of Keysquare Letters";
+      }
+      else{
+        return newKeysquare;
+      }
+    }
+
+
+
 
     //Generate a keysquare matrix
     readfgx.generateMatrix = function(keysquare)
@@ -34,7 +104,7 @@ export var readfgx = (function () {
 
     //Correctly Sorts and returns new column locations
     //The input is the keyword and our Columnar sorted matrix
-    readfgx.columnar = function(keyword, tempArray){
+    readfgx.columnar = function(keyword, tempArray, yValue){
       //Start of our Columnar Process
       //turns our keyword to lowercase
       var lower = keyword.toLowerCase();
@@ -54,12 +124,13 @@ export var readfgx = (function () {
             temp = asciikeyword[j];
             asciikeyword[j] = asciikeyword[i];
             asciikeyword[i] = temp;
-            var temp2 = tempArray[0][j];
-            var temp4 = tempArray[1][j];
-            tempArray[0][j] = tempArray[0][i];
-            tempArray[1][j] = tempArray[1][i];
-            tempArray[0][i] = temp2;
-            tempArray[1][i] = temp4;
+
+            for (let a = 0; a < yValue; ++a){
+              var temp2 = tempArray[a][j];
+              tempArray[a][j] = tempArray[a][i];
+              tempArray[a][i] = temp2;
+            }
+
           }
         }
       }
@@ -126,6 +197,32 @@ export var readfgx = (function () {
       return temp;
     }
 
+    //Converts xy coordinates 0-4 into ADFGX
+    //Takes in either the x or y coordinate, doesn't matter, it's a number 0-4
+    readfgx.reverseTranslate = function(targetLetter){
+      var temp;
+
+      if (targetLetter == "A"){
+        temp = 0;
+      }
+      else if (targetLetter == "D"){
+        temp = 1;
+      }
+      else if (targetLetter == "F"){
+        temp = 2;
+      }
+      else if (targetLetter == "G"){
+        temp = 3;
+      }
+      else if (targetLetter == "X"){
+        temp = 4;
+      }
+      return temp;
+    }
+
+
+
+
 
     //Loops through our translate Function
     //Recieves an array of numbers which coorespond to xy coordinates
@@ -133,6 +230,17 @@ export var readfgx = (function () {
       let translated = []
       for (let i = 0; i < numberedArray.length; ++i){
         translated[i] = readfgx.translate(numberedArray[i]);
+      }
+      //Returns an array of letters ADFGX corresponding to the input numbers
+      return translated;
+    }
+
+    //Loops through our translate Function
+    //Recieves an array of numbers which coorespond to xy coordinates
+    readfgx.reverseTranslationLoop = function(characterArray){
+      let translated = []
+      for (let i = 0; i < characterArray.length; ++i){
+        translated[i] = readfgx.reverseTranslate(characterArray[i]);
       }
       //Returns an array of letters ADFGX corresponding to the input numbers
       return translated;
@@ -163,7 +271,7 @@ export var readfgx = (function () {
         }
       }
       //We run our translated coordinates thorugh columnar
-      tempArray = readfgx.columnar(keyword, tempArray);
+      tempArray = readfgx.columnar(keyword, tempArray, rows);
       //Returns our entire encryped matrix after Columnar
       return tempArray;
     }
@@ -188,12 +296,180 @@ export var readfgx = (function () {
 
     //Our encryption function which runs all other functions
     readfgx.encryption = function(word, keysquare, keyword){
-      var temparray = readfgx.encryptionWordCoordinates(word, keysquare);
-      var encryptedWord1 = readfgx.translationLoop(temparray);
-      var temp = readfgx.generateEncryptionMatrix(keyword, encryptedWord1, word.length*2);
-      var temp2 = readfgx.encryptionPairs(temp, keyword.length, ((word.length * 2)/(keyword.length)));
-      return temp2;
+      var filterCheck = readfgx.filter(keysquare);
+      if (filterCheck.length == 35){
+        return "There was a problem with the Keysquare, cannot Encrypt"
+      }
+      else {
+        var truth = readfgx.duplicateChecker(filterCheck);
+        if (truth == 1){
+          return "There was a duplicate letter somewhere in your keysquare"
+        }
+        else {
+          var newMessage = readfgx.iAdder(word);
+          var temparray = readfgx.encryptionWordCoordinates(newMessage, filterCheck);
+          var encryptedWord1 = readfgx.translationLoop(temparray);
+          var temp = readfgx.generateEncryptionMatrix(keyword, encryptedWord1, newMessage.length*2);
+          var temp2 = readfgx.encryptionPairs(temp, keyword.length, ((newMessage.length * 2)/(keyword.length)));
+          return temp2;
+        }
+      }
     }
+
+
+    readfgx.sortFunction = function(numberArray, characters, yValue){
+      var numbers = numberArray;
+      var tempArray = characters;
+
+      for (let i = 0; i <= numberArray.length; ++i){
+        for (let j = i; j <= numberArray.length; ++j){
+          var temp;
+
+          if (numbers[i] > numbers[j])
+          {
+            temp = numbers[j];
+            numbers[j] = numbers[i];
+            numbers[i] = temp;
+
+            for (let a = 0; a < yValue; ++a){
+              var temp2 = tempArray[a][j];
+              tempArray[a][j] = tempArray[a][i];
+              tempArray[a][i] = temp2;
+            }
+
+          }
+        }
+      }
+
+      return tempArray;
+    }
+
+
+
+    //Takes in plaintext word and keysquare
+    readfgx.decryptionWord = function(numberArray, keysquare){
+      //We create a 5x5 matrix using our keysquare
+      var matrix = readfgx.generateMatrix(keysquare);
+      var n = 0;
+      let word = [];
+      //Runs for the length of our plaintext input
+      //We're getting the x and y numbered coordinates of each letter in our message
+      for (let i = 0; i < numberArray.length; i = i + 2){
+        var a = numberArray[i];
+        var b = numberArray[i+1];
+        word[n] = matrix[a][b];
+        ++n;
+    }
+      //Returns the numbered x and y locations of each letter in the message coressponding to our ADFGX matrix
+      return word;
+  }
+
+
+
+
+    readfgx.decryptionColumnar = function(keyword, tempArray, yValue){
+      //Start of our Columnar Process
+      //turns our keyword to lowercase
+      var lower = keyword.toLowerCase();
+      //ASCII number array
+      let asciikeyword = [];
+      let numberArray = [];
+      //This is our target return with the small number ascii array
+      for (let i = 0; i < keyword.length; ++i){
+        asciikeyword[i] = keyword.charCodeAt(i);
+        numberArray[i] = i;
+      }
+      //Selection Sort using the keyword, but as ASCII Values
+      //We do all the same moves the rows in our Columnar Matrix
+      for (let a = 0; a <= keyword.length; ++a){
+        for (let b = a; b <= keyword.length; ++b){
+          var temp;
+          var temp2;
+          if (asciikeyword[a] > asciikeyword[b])
+          {
+            temp = asciikeyword[b];
+            asciikeyword[b] = asciikeyword[a];
+            asciikeyword[a] = temp;
+
+            temp2 = numberArray[a];
+            numberArray[a] = numberArray[b];
+            numberArray[b] = temp2;
+          }
+        }
+      }
+
+        var output = readfgx.sortFunction(numberArray, tempArray, yValue);
+        //Returns a matrix after being run through columnar
+        return output;
+    }
+
+
+
+
+    readfgx.generateDecryptionMatrix = function(keyword, letterArray, length){
+      var tempArray = [];
+      //The amount of Rows for our columnar matrix is the ADFGX coordinate length / our keyword's length
+      var rows = length / keyword.length;
+      //Creating another matrix
+      for (var i = 0; i < rows; i++){
+        tempArray[i] = [];
+      }
+      var i = 0;
+      //Here we insert our coordinates into a columnar matrix and put - in the blank spots
+      for (let a = 0; a < keyword.length; a++){
+        for (let b = 0; b < rows; b++){
+          if (i < letterArray.length){
+            tempArray[b][a] = letterArray[i];
+          }
+          //Denotes blanks
+          else {
+            tempArray[b][a] = '-';
+          }
+            ++i;
+        }
+      }
+      return tempArray;
+    }
+
+
+    readfgx.matrixToString = function(matrix, row, length){
+      var word = [];
+      var num = 0;
+
+      for (let i = 0; i < row; ++i){
+        for (let j = 0; j < length; ++j){
+          word[num] = matrix[i][j];
+          ++num;
+        }
+      }
+      return word;
+    }
+
+
+
+
+    readfgx.decryption = function(word, keysquare, keyword){
+      var filterCheck = readfgx.filter(keysquare);
+      if (filterCheck.length == 35){
+        return "There was a problem with the Keysquare, cannot Decrypt"
+      }
+      else {
+        var truth = readfgx.duplicateChecker(filterCheck);
+        if (truth == 1){
+          return "There was a duplicate letter somewhere in your keysquare"
+        }
+        else {
+          var message = word.toUpperCase();
+          var temp1 = readfgx.generateDecryptionMatrix(keyword, message, message.length);
+          var temp2 = readfgx.decryptionColumnar(keyword, temp1, word.length/keyword.length);
+          var temp3 = readfgx.matrixToString(temp2, word.length/keyword.length, keyword.length);
+          var temp4 = readfgx.reverseTranslationLoop(temp3);
+          var temp5 = readfgx.decryptionWord(temp4, keysquare);
+        }
+      }
+        return temp5;
+    }
+
 
 
     readfgx.main = function (args) {
