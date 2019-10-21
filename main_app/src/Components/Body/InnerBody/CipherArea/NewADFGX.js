@@ -91,7 +91,7 @@ const Encrypt = (props) => {
  //var temp = adfgx.encrypt(props.inputText)
  var keyword = document.getElementById("keyword_area").value;
  var keysquare = document.getElementById("keysquare_area").value;
- var encryptionWord = document.getElementById("input_textArea2").value;
+ var encryptionWord = document.getElementById("input_textArea").value;
  var temp2 = readfgx.encryption(encryptionWord, keysquare, keyword);
  //var temp = props.inputText
  return (

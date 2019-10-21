@@ -1,16 +1,19 @@
 //reADFGVX.js file (Not Completed)
 //More Comments
 //Input Message Error Check
+//Add a comma parser
+//Add a nonnumeric parser
 
 //Declaring our class
 export var readfgx = (function () {
     function readfgx() {
     }
 
-
+    //This is a function to check for duplicates within a keysquare
+    //Accepts keysquare as input
     readfgx.duplicateChecker = function (keysquare){
       var truth = 0;
-
+      //Parses through the keysquare array and cecks for any duplicate letters
       for (let i = 0; i < keysquare.length && truth == 0; ++i){
         for (let j = i+1; j < keysquare.length && truth == 0; ++j){
           if (keysquare[i] == keysquare[j]){
@@ -18,6 +21,7 @@ export var readfgx = (function () {
           }
         }
       }
+      //Returns 1 upon duplicate and 0 if none
       return truth;
     }
 
@@ -43,6 +47,7 @@ export var readfgx = (function () {
             }
         }
       }
+      //Returns the keysquare without any j's
       return buff;
     }
 
@@ -59,7 +64,7 @@ export var readfgx = (function () {
           buff[i] = message[i];
         }
       }
-
+      //Returns the message, but with i's in place of the j's in the encryption message
       return buff;
     }
 
@@ -69,9 +74,11 @@ export var readfgx = (function () {
       var newKeysquare = readfgx.jRemover(keysquare);
 
       if (newKeysquare.length != 25){
+        //Returns error message
         return "Invalid Amount of Keysquare Letters";
       }
       else{
+        //Else return that the keysquare is now incorrect
         return newKeysquare;
       }
     }
@@ -193,7 +200,7 @@ export var readfgx = (function () {
       else if (targetLetter == 4){
         temp = 'X';
       }
-
+      //Returns whatever the number to letter translation is
       return temp;
     }
 
@@ -217,10 +224,9 @@ export var readfgx = (function () {
       else if (targetLetter == "X"){
         temp = 4;
       }
+      //Returns letter to number translation
       return temp;
     }
-
-
 
 
 
@@ -298,11 +304,13 @@ export var readfgx = (function () {
     readfgx.encryption = function(word, keysquare, keyword){
       var filterCheck = readfgx.filter(keysquare);
       if (filterCheck.length == 35){
+        //Returns error message
         return "There was a problem with the Keysquare, cannot Encrypt"
       }
       else {
         var truth = readfgx.duplicateChecker(filterCheck);
         if (truth == 1){
+          //Returns error message
           return "There was a duplicate letter somewhere in your keysquare"
         }
         else {
@@ -311,12 +319,14 @@ export var readfgx = (function () {
           var encryptedWord1 = readfgx.translationLoop(temparray);
           var temp = readfgx.generateEncryptionMatrix(keyword, encryptedWord1, newMessage.length*2);
           var temp2 = readfgx.encryptionPairs(temp, keyword.length, ((newMessage.length * 2)/(keyword.length)));
+          //Returns encrypted message
           return temp2;
         }
       }
     }
 
 
+    //This is a sort function which sorts our input decryption matrix into correct form
     readfgx.sortFunction = function(numberArray, characters, yValue){
       var numbers = numberArray;
       var tempArray = characters;
@@ -340,7 +350,8 @@ export var readfgx = (function () {
           }
         }
       }
-
+      //Sorted Columnar array is returned
+      //Example, the matrix we would have for german and not aegmnr
       return tempArray;
     }
 
@@ -366,7 +377,7 @@ export var readfgx = (function () {
 
 
 
-
+    //Performs columnar operation again using keyword to know how to set up our matrix
     readfgx.decryptionColumnar = function(keyword, tempArray, yValue){
       //Start of our Columnar Process
       //turns our keyword to lowercase
@@ -398,14 +409,15 @@ export var readfgx = (function () {
         }
       }
 
+        //Returns the properly set up matrix, before it was encrypted
         var output = readfgx.sortFunction(numberArray, tempArray, yValue);
-        //Returns a matrix after being run through columnar
+        //Returns the preEncryption columnar matrix
         return output;
     }
 
 
 
-
+    //This function generates our post columnar matrix
     readfgx.generateDecryptionMatrix = function(keyword, letterArray, length){
       var tempArray = [];
       //The amount of Rows for our columnar matrix is the ADFGX coordinate length / our keyword's length
@@ -428,10 +440,12 @@ export var readfgx = (function () {
             ++i;
         }
       }
+      //Returns our what post Columnar matrix looked like
       return tempArray;
     }
 
 
+    //This function converts our number coordinates into understandble text
     readfgx.matrixToString = function(matrix, row, length){
       var word = [];
       var num = 0;
@@ -442,20 +456,23 @@ export var readfgx = (function () {
           ++num;
         }
       }
+      //Returns fully translated word
       return word;
     }
 
 
 
-
+    //Our Decryption Function
     readfgx.decryption = function(word, keysquare, keyword){
       var filterCheck = readfgx.filter(keysquare);
       if (filterCheck.length == 35){
+        //Return error message
         return "There was a problem with the Keysquare, cannot Decrypt"
       }
       else {
         var truth = readfgx.duplicateChecker(filterCheck);
         if (truth == 1){
+          //Return error message
           return "There was a duplicate letter somewhere in your keysquare"
         }
         else {
@@ -467,6 +484,7 @@ export var readfgx = (function () {
           var temp5 = readfgx.decryptionWord(temp4, keysquare);
         }
       }
+        //Returns fully decrypted word
         return temp5;
     }
 

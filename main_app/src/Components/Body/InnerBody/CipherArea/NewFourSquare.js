@@ -26,10 +26,15 @@ class NewFourSquare extends Component {
         }
     }
 
+//var data = [
+//  { one: 'one', two:'two', three:'three' }
+//  { one: 'uno', two:'dos', three: 'tres' }
+//  { one: 'ichi', two:'ni', three: 'san'}
+//];
+//<Griddle data={data} />
 
 
     render() {
-
         return (
             <div id="foursquare_div" className="specific_cipher_class">
                 <h1>Foursquare</h1>

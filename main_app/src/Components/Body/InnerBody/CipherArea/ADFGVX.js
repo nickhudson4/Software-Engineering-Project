@@ -20,21 +20,16 @@ export var adfgvx = (function () {
     var target;
     //Our keyword used
     var kword;
-
+    //Returns the word sent in for encryption
     var encryptionWord;
     adfgvx.eWord = function(){
       return encryptionWord;
     }
+    //Returns the word sent in for decryption
     var decryptionWord;
     adfgvx.dWord = function(){
       return decryptionWord;
     }
-
-    var x1;
-    var x2;
-    var y1;
-    var y2;
-
 
     let inputPair = [2];
     let outputPair = [];
@@ -69,11 +64,12 @@ export var adfgvx = (function () {
       return buff;
   }
 
+  //Function for putting together the array of letters for the decoded word
   adfgvx.decryptMessage = function (){
       decodedArray[arraySize2] = adfgvx.search(inputPair);
       ++arraySize2;
   }
-
+  //Function for decrypting a word
   adfgvx.decrypt = function(word){
     decryptionWord = word;
     for(let i = 0; i < word.length; i = i + 2){
@@ -84,6 +80,7 @@ export var adfgvx = (function () {
     return decodedArray;
   }
 
+    //Function for putting together the array of letters for an encoded word
     adfgvx.encryptMessage = function(){
     var truth = 0;
 
@@ -102,6 +99,7 @@ export var adfgvx = (function () {
     }
   }
 
+  //Function for encrypting a word
   adfgvx.encrypt = function(word){
   if(word.length % 2 != 0)
   {
@@ -118,7 +116,7 @@ export var adfgvx = (function () {
   }
 
 
-
+  //Starts the process by creating our matricies
   adfgvx.start = function(keyword, terms){
     adfgvx.createThings(keyword);
     var temp = adfgvx.search(terms);
@@ -188,7 +186,7 @@ export var adfgvx = (function () {
     return(myarr[x][y])
   }
 
-
+  //Removes all letters that are in our keyword from the alphabet
   adfgvx.newArray1 = function(){
     let array = [];
     var truth = 0;
@@ -208,7 +206,7 @@ export var adfgvx = (function () {
   return array;
 }
 
-
+  //Removes all numbers that are in our keyword from the number list
   adfgvx.newArray2 = function(){
     let array = [];
     var truth = 0;
@@ -229,7 +227,7 @@ export var adfgvx = (function () {
 }
 
 
-
+  //Creates our matrix
   adfgvx.createThings = function(keyword){
   //Sets our keyword value
   kword = adfgvx.filter(keyword);
@@ -275,7 +273,7 @@ export var adfgvx = (function () {
   //Returns the matrix
   return myarr;
 }
-  
+  //Searches for the output pair for each letter
   adfgvx.pushMessage = function(){
       if (x === 0)
       {

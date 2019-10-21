@@ -2,24 +2,14 @@ import React, { Component } from 'react';
 import './CipherArea.css';
 import Table from './Table';
 
-/*
-    Renders specific component based on cipher chosen.
-    Actual cipher backend logic will come from here
-*/
-
 class MonoAlphSub extends Component {
-  render() {
-    var inputText = this.props.inputText;
 
-    var tableHeadings1 = ["Plaintext", "Ciphertext"];
-    var tableHeadings2 = ["Input", "Output"];
-
-    return (
-        <div id="monoAlphSub_div">
-          <Table numRows = {27} numCol = {2} tableHeadings = {tableHeadings1}/>
-        </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+            </div>
+        );
+    }
 }
 
 export default MonoAlphSub;

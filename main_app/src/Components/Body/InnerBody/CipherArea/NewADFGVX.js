@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './CipherArea.css';
 import Table from './Table';
 import { adfgvx } from './ADFGVX.js';
-// import { adfgvx } from './ADFGVX.js';
-// import { adfgvx } from './../../../../../../ADFGVX.js';
 
 /*
     Renders specific component based on cipher chosen.
