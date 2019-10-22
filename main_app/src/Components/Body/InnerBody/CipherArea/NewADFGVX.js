@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './CipherArea.css';
 import Table from './Table';
-import { adfgvx } from './ADFGVX.js';
+import { readfgvx } from './reADFGVX.js'
 
 /*
     Renders specific component based on cipher chosen.
@@ -16,12 +16,13 @@ t      i     e       n
 
 */
 
-class NewADFGVX extends Component {
+class NewADFGX extends Component {
     constructor(props){
         super(props);
         this.state = {
-            keyword: "adfgvx", //Defualt number of rails
-            inputText: 'none',
+            keyword: 'german', //keyword_input
+            keysquare: 'phqgmeaynofdxkrcvszwbutil',
+            inputText: 'attack',
             mode: 'none'
         }
     }
@@ -29,25 +30,34 @@ class NewADFGVX extends Component {
 
 
     render() {
-
         return (
-            <div id="adfgvx_div" className="specific_cipher_class">
+            <div id="railFence_div" className="specific_cipher_class">
                 <h1>ADFGVX</h1>
+                <br/><h4  style={{color: 'white'}}>History :In cryptography, the ADFGVX cipher was a field cipher used by the German Army during World War I. ADFGVX was in fact an extension of an earlier cipher called the ADFGX cipher. Invented by Colonel Fritz Nebel and introduced in March 1918, the cipher was a fractionating transposition cipher which combined a modified Polybius square with a single columnar transposition. The cipher is named after the six possible letters used in the ciphertext: A, D, F, G, V and X. These letters were chosen deliberately because they sound very different from each other when transmitted via morse code. The intention was to reduce the possibility of operator error.</h4><br/>
+
+                <br/><h4  style={{color: 'white'}}>Steps:<br/>
+                1. Build a 5x5 table to represent ADFGVX<br/>
+                2. Encode the plaintext using the matrix, and it will be of AADD.. form<br/>
+                3. Write the code word with the enciphered plaintext underneath<br/>
+                4. Perform a columnar transposition<br/>
+                5. Read the final ciphertext off in columns<br/>
+                </h4><br/>
+
                 <div id="input_textArea_div" className="input_text_area">
-                    <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Input" rows="25" cols="80"></textarea>
+                    <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Decrypt" rows="25" cols="25"></textarea><br/>
+                    <textarea className="inputOutput_textArea" id="keyword_area" placeholder="Keyword" rows="1" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="keysquare_area" placeholder="Keysquare" rows="1" cols="25"></textarea>
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
                         <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
                         <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
 
-                        <form className="textBox_form">
-                            Keyword: <input id="rails_input" className="input_textBox" type="text" min="2" step="1" name="num_rails" value={this.state.keyword} onChange={evt => this.updateKeyword(evt)}></input>
-                        </form>
                     </div>
 
 
                 </div>
-                <LoadMode mode = {this.state.mode} inputKeyword = {this.state.keyword} inputText = {this.state.inputText}/>
+                <LoadMode mode = {this.state.mode} inputKeyword = {this.state.keyword} inputText = {this.state.inputText} inputKeysquare = {this.state.keysquare}/>
             </div>
         );
     }
@@ -59,39 +69,46 @@ class NewADFGVX extends Component {
       mode: 'encrypt'
     })
   }
+
   decryptOnClick = () => {
-    var text = document.getElementById("input_textArea").value;  //Inputed text
+    var text = document.getElementById("input_textArea2").value;  //Inputed text
     this.setState({
       inputText: text,
       mode: 'decrypt'
     })
   }
-
-    updateKeyword(evt) { //Reload when number of rails is changed
-        this.setState({
-          keyword: evt.target.value
-        });
-    }
 }
 
-export default NewADFGVX;
+export default NewADFGX;
 
 
 const Encrypt = (props) => {
- adfgvx.start(props.inputKeyword)
- var temp = adfgvx.encrypt(props.inputText)
+ //adfgx.start(props.inputKeyword)
+ //var temp = adfgx.encrypt(props.inputText)
+ var keyword = document.getElementById("keyword_area").value;
+ var keysquare = document.getElementById("keysquare_area").value;
+ var encryptionWord = document.getElementById("input_textArea").value;
+ //var temp2 = readfgvx.encryption(encryptionWord, keysquare, keyword);
+ //var temp = props.inputText
+ var temp2 = readfgvx.encryption(encryptionWord, keysquare, keyword);
  return (
-     <OutputTextarea message={temp} />
+     <OutputTextarea message={temp2} />
  );
 }
 
 
 
 const Decrypt = (props) => {
-  adfgvx.start(props.inputKeyword)
-  var temp = adfgvx.decrypt(props.inputText)
+  //adfgx.start(props.inputKeyword)
+  //var temp = readfgvx.translate(props.inputText)
+  //var temp2 = readfgvx.generateMatrix("abcdefghiklmnopqrstuvwxyz" )
+  var keyword = document.getElementById("keyword_area").value;
+  var keysquare = document.getElementById("keysquare_area").value;
+  var decryptionWord = document.getElementById("input_textArea2").value;
+  //var temp2 = readfgvx.decryption("XFDDDDFAFGXG", keysquare, keyword);
+  var temp2 = readfgvx.decryption(decryptionWord, keysquare, keyword);
     return (
-        <OutputTextarea message={temp} />
+        <OutputTextarea message={temp2} />
     );
 }
 
@@ -104,9 +121,11 @@ var copyToClipboard = (e) => {
     e.target.focus();
 };
 
+
 const LoadMode = (props) => {
     var mode = props.mode;
-    var inputKeyword = props.inputKeyword;
+    var inputKeyword = props.keyword;
+    var inputKeysquare = props.keysquare;
     var inputText = props.inputText;
 
     if (mode === 'encrypt'){
@@ -131,7 +150,7 @@ const OutputTextarea = (props) => {
     return (
         <div id="output_textArea_div" className="output_text_area">
             <textarea className="inputOutput_textArea" id="output_textArea" value={props.message} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
-            <button onClick={copyToClipboard}>Copy <br/> Output</button>
+            <br/><button onClick={copyToClipboard}>Copy <br/> Output</button>
         </div>
     );
 }
