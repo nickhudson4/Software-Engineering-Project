@@ -16,7 +16,7 @@ t      i     e       n
 
 */
 
-class NewADFGX extends Component {
+class NewADFGVX extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -33,7 +33,7 @@ class NewADFGX extends Component {
         return (
             <div id="railFence_div" className="specific_cipher_class">
                 <h1>ADFGVX</h1>
-                <br/><h4  style={{color: 'white'}}>History :In cryptography, the ADFGVX cipher was a field cipher used by the German Army during World War I. ADFGVX was in fact an extension of an earlier cipher called the ADFGX cipher. Invented by Colonel Fritz Nebel and introduced in March 1918, the cipher was a fractionating transposition cipher which combined a modified Polybius square with a single columnar transposition. The cipher is named after the six possible letters used in the ciphertext: A, D, F, G, V and X. These letters were chosen deliberately because they sound very different from each other when transmitted via morse code. The intention was to reduce the possibility of operator error.</h4><br/>
+                <br/><h4  style={{color: 'white'}}>History :In cryptography, the ADFGVX cipher was a field cipher used by the German Army during World War I. ADFGVX was in fact an extension of an earlier cipher called the adfgvx cipher. Invented by Colonel Fritz Nebel and introduced in March 1918, the cipher was a fractionating transposition cipher which combined a modified Polybius square with a single columnar transposition. The cipher is named after the six possible letters used in the ciphertext: A, D, F, G, V and X. These letters were chosen deliberately because they sound very different from each other when transmitted via morse code. The intention was to reduce the possibility of operator error.</h4><br/>
 
                 <br/><h4  style={{color: 'white'}}>Steps:<br/>
                 1. Build a 5x5 table to represent ADFGVX<br/>
@@ -79,7 +79,7 @@ class NewADFGX extends Component {
   }
 }
 
-export default NewADFGX;
+export default NewADFGVX;
 
 
 const Encrypt = (props) => {

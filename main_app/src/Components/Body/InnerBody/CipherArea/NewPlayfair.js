@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './CipherArea.css';
 import Table from './Table';
-import { playfair } from './Playfair.js';
+import { adfgx } from './ADFGX.js';
+import { playfair } from './Playfair.js'
 
 /*
     Renders specific component based on cipher chosen.
@@ -16,12 +17,13 @@ t      i     e       n
 
 */
 
-class Playfair extends Component {
+class NewPlayfair extends Component {
     constructor(props){
         super(props);
         this.state = {
-            keyword: "playfair", //Defualt number of rails
-            inputText: 'none',
+            keyword: 'german', //keyword_input
+            keysquare: 'phqgmeaynofdxkrcvszwbutil',
+            inputText: 'attack',
             mode: 'none'
         }
     }
@@ -29,25 +31,25 @@ class Playfair extends Component {
 
 
     render() {
-
         return (
-            <div id="playfair_div" className="specific_cipher_class">
+            <div id="railFence_div" className="specific_cipher_class">
                 <h1>Playfair</h1>
+
                 <div id="input_textArea_div" className="input_text_area">
-                    <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Input" rows="25" cols="80"></textarea>
+                    <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Decrypt" rows="25" cols="25"></textarea><br/>
+                    <textarea className="inputOutput_textArea" id="keyword_area" placeholder="Keyword" rows="1" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="keysquare_area" placeholder="Keysquare" rows="1" cols="25"></textarea>
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
                         <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
                         <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
 
-                        <form className="textBox_form">
-                            Keyword: <input id="rails_input" className="input_textBox" type="text" min="2" step="1" name="num_rails" value={this.state.keyword} onChange={evt => this.updateKeyword(evt)}></input>
-                        </form>
                     </div>
 
 
                 </div>
-                <LoadMode mode = {this.state.mode} inputKeyword = {this.state.keyword} inputText = {this.state.inputText}/>
+                <LoadMode mode = {this.state.mode} inputKeyword = {this.state.keyword} inputText = {this.state.inputText} inputKeysquare = {this.state.keysquare}/>
             </div>
         );
     }
@@ -59,27 +61,27 @@ class Playfair extends Component {
       mode: 'encrypt'
     })
   }
+
   decryptOnClick = () => {
-    var text = document.getElementById("input_textArea").value;  //Inputed text
+    var text = document.getElementById("input_textArea2").value;  //Inputed text
     this.setState({
       inputText: text,
       mode: 'decrypt'
     })
   }
-
-    updateKeyword(evt) { //Reload when number of rails is changed
-        this.setState({
-          keyword: evt.target.value
-        });
-    }
 }
 
-export default Playfair;
+export default NewPlayfair;
 
 
 const Encrypt = (props) => {
- playfair.start()
- var temp = playfair.encrypt(props.inputText)
+ //adfgx.start(props.inputKeyword)
+ //var temp = adfgx.encrypt(props.inputText)
+ var keyword = document.getElementById("keyword_area").value;
+ var keysquare = document.getElementById("keysquare_area").value;
+ var encryptionWord = document.getElementById("input_textArea").value;
+ //var temp2 = readfgx.encryption(encryptionWord, keysquare, keyword);
+ var temp = playfair.encrypt("hammer", "monarchybdefgiklpqstuvwxz");
  return (
      <OutputTextarea message={temp} />
  );
@@ -88,10 +90,17 @@ const Encrypt = (props) => {
 
 
 const Decrypt = (props) => {
-  playfair.start()
-  var temp = playfair.decrypt(props.inputText)
+  //adfgx.start(props.inputKeyword)
+  //var temp = readfgx.translate(props.inputText)
+  //var temp2 = readfgx.generateMatrix("abcdefghiklmnopqrstuvwxyz" )
+  var keyword = document.getElementById("keyword_area").value;
+  var keysquare = document.getElementById("keysquare_area").value;
+  var decryptionWord = document.getElementById("input_textArea2").value;
+  //var temp2 = readfgx.decryption("XFDDDDFAFGXG", keysquare, keyword);
+  //var temp2 = readfgx.decryption(decryptionWord, keysquare, keyword);
+  var temp2 = playfair.encrypt("boaukm", "monarchybdefgiklpqstuvwxz");
     return (
-        <OutputTextarea message={temp} />
+        <OutputTextarea message={temp2} />
     );
 }
 
@@ -104,9 +113,11 @@ var copyToClipboard = (e) => {
     e.target.focus();
 };
 
+
 const LoadMode = (props) => {
     var mode = props.mode;
-    var inputKeyword = props.inputKeyword;
+    var inputKeyword = props.keyword;
+    var inputKeysquare = props.keysquare;
     var inputText = props.inputText;
 
     if (mode === 'encrypt'){
@@ -131,7 +142,7 @@ const OutputTextarea = (props) => {
     return (
         <div id="output_textArea_div" className="output_text_area">
             <textarea className="inputOutput_textArea" id="output_textArea" value={props.message} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
-            <button onClick={copyToClipboard}>Copy <br/> Output</button>
+            <br/><button onClick={copyToClipboard}>Copy <br/> Output</button>
         </div>
     );
 }
