@@ -8,6 +8,7 @@ import NewFourSquare from './CipherArea/NewFourSquare';
 import NewTwoSquare from './CipherArea/NewTwoSquare';
 import NewPlayfair from './CipherArea/NewPlayfair';
 import NewVigenere from './CipherArea/NewVigenere';
+import NewColumnar from './CipherArea/NewColumnar';
 /*
     Renders specific component based on cipher chosen
 */
@@ -36,6 +37,11 @@ const GetCipher = (props) => {
   else if (props.whichCipher === 'adfgx'){
     return (
       <NewADFGX/>
+    );
+  }
+  else if (props.whichCipher === 'col'){
+    return (
+      <NewColumnar/>
     );
   }
   else if (props.whichCipher === 'adfgvx'){
