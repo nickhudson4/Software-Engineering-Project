@@ -50,23 +50,23 @@ export var twosquare = (function () {
 
   //Encrypts a word
   twosquare.encrypt = function(word){
-  let searchPair = [];
+    let searchPair = [];
 
-  if(word.length % 2 != 0)
-  {
-    word = word + 'x';
-  }
-  encryptionWord = word;
-  for(let i = 0; i < word.length; ++i, ++i)
-  {
-      searchPair[0] = word[i];
-      searchPair[1] = word[i+1];
-      twosquare.coord(searchPair);
-      var temp = twosquare.letterPair();
-      codedArray.push(temp);
-  }
+    if(word.length % 2 != 0)
+    {
+      word = word + 'x';
+    }
+    encryptionWord = word;
+    for(let i = 0; i < word.length; ++i, ++i)
+    {
+        searchPair[0] = word[i];
+        searchPair[1] = word[i+1];
+        twosquare.coord(searchPair);
+        var temp = twosquare.letterPair();
+        codedArray.push(temp);
+    }
 
-    return codedArray;
+      return codedArray;
   }
 
     //Beings our 2 square program

@@ -7,13 +7,6 @@ import { vigenere} from './Vigenere.js';
     Renders specific component based on cipher chosen.
     Actual cipher backend logic will come from here
 
-
-    thisisatestinput encrypted with 3 rails:
-
-t      i     e       n
-  h  s  s  t   s   i   p   t  => tienhsstsiptiatu
-   i     a       t       u
-
 */
 
 class Vigenere extends Component {
@@ -89,6 +82,9 @@ const Encrypt = (props) => {
 
 const Decrypt = (props) => {
   vigenere.start()
+  return (
+      <div></div> //Tmp
+  )
 }
 
 
