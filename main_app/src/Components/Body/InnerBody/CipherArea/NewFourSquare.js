@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './CipherArea.css';
 import Table from './Table';
-import { foursquare } from './FourSquare.js';
+import { foursquare } from './FourSquare.js'
 
 /*
     Renders specific component based on cipher chosen.
@@ -20,39 +20,35 @@ class NewFourSquare extends Component {
     constructor(props){
         super(props);
         this.state = {
-            keyword: "foursquare", //Defualt number of rails
-            inputText: 'none',
+            keyword: 'german', //keyword_input
+            keysquare: 'phqgmeaynofdxkrcvszwbutil',
+            inputText: 'attack',
             mode: 'none'
         }
     }
 
-//var data = [
-//  { one: 'one', two:'two', three:'three' }
-//  { one: 'uno', two:'dos', three: 'tres' }
-//  { one: 'ichi', two:'ni', three: 'san'}
-//];
-//<Griddle data={data} />
 
 
     render() {
         return (
-            <div id="foursquare_div" className="specific_cipher_class">
-                <h1>Foursquare</h1>
+            <div id="railFence_div" className="specific_cipher_class">
+                <h1>Four Square</h1>
+
                 <div id="input_textArea_div" className="input_text_area">
-                    <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Input" rows="25" cols="80"></textarea>
+                    <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Decrypt" rows="25" cols="25"></textarea><br/>
+                    <textarea className="inputOutput_textArea" id="keysquare_area" placeholder="Keysquare 1" rows="1" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="keysquare_area2" placeholder="Keysquare 2" rows="1" cols="25"></textarea>
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
                         <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
                         <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
 
-                        <form className="textBox_form">
-                            Keyword: <input id="rails_input" className="input_textBox" type="text" min="2" step="1" name="num_rails" value={this.state.keyword} onChange={evt => this.updateKeyword(evt)}></input>
-                        </form>
                     </div>
 
 
                 </div>
-                <LoadMode mode = {this.state.mode} inputKeyword = {this.state.keyword} inputText = {this.state.inputText}/>
+                <LoadMode mode = {this.state.mode} inputKeyword = {this.state.keyword} inputText = {this.state.inputText} inputKeysquare = {this.state.keysquare}/>
             </div>
         );
     }
@@ -64,27 +60,24 @@ class NewFourSquare extends Component {
       mode: 'encrypt'
     })
   }
+
   decryptOnClick = () => {
-    var text = document.getElementById("input_textArea").value;  //Inputed text
+    var text = document.getElementById("input_textArea2").value;  //Inputed text
     this.setState({
       inputText: text,
       mode: 'decrypt'
     })
   }
-
-    updateKeyword(evt) { //Reload when number of rails is changed
-        this.setState({
-          keyword: evt.target.value
-        });
-    }
 }
 
 export default NewFourSquare;
 
 
 const Encrypt = (props) => {
- foursquare.start()
- var temp = foursquare.encrypt(props.inputText)
+ var keysquare1 = document.getElementById("keysquare_area").value;
+ var keysquare2 = document.getElementById("keysquare_area2").value;
+ var encryptionWord = document.getElementById("input_textArea").value;
+ var temp = foursquare.encrypt("testv", "zgptfoihmuwdrcnykeqaxvsbl", "mfnbdcrhsaxyogvituewlqzkp");
  return (
      <OutputTextarea message={temp} />
  );
@@ -93,10 +86,14 @@ const Encrypt = (props) => {
 
 
 const Decrypt = (props) => {
-  foursquare.start()
-  var temp = foursquare.decrypt(props.inputText)
+  var keysquare1 = document.getElementById("keysquare_area").value;
+  var keysquare2 = document.getElementById("keysquare_area2").value;
+  var decryptionWord = document.getElementById("input_textArea2").value;
+  var temp2 = foursquare.decrypt("abqusl", "zgptfoihmuwdrcnykeqaxvsbl", "mfnbdcrhsaxyogvituewlqzkp");
+  //var temp2 = playfair.encrypt(decryptionWord, keysquare);
+  //var temp2 = "hello";
     return (
-        <OutputTextarea message={temp} />
+        <OutputTextarea message={temp2} />
     );
 }
 
@@ -109,9 +106,11 @@ var copyToClipboard = (e) => {
     e.target.focus();
 };
 
+
 const LoadMode = (props) => {
     var mode = props.mode;
-    var inputKeyword = props.inputKeyword;
+    var inputKeyword = props.keyword;
+    var inputKeysquare = props.keysquare;
     var inputText = props.inputText;
 
     if (mode === 'encrypt'){
@@ -136,7 +135,7 @@ const OutputTextarea = (props) => {
     return (
         <div id="output_textArea_div" className="output_text_area">
             <textarea className="inputOutput_textArea" id="output_textArea" value={props.message} placeholder="Output" rows="25" cols="80" onChange={() => {}}></textarea>
-            <button onClick={copyToClipboard}>Copy <br/> Output</button>
+            <br/><button onClick={copyToClipboard}>Copy <br/> Output</button>
         </div>
     );
 }

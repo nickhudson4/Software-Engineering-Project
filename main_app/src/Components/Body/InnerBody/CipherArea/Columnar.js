@@ -1,24 +1,35 @@
+//Columnar.js
 
 export var columnar = (function () {
 
     function columnar() {
     }
 
+    //Columnar Encryption Function
+    //Takes in the encryption message and keyword
     columnar.encrypt = function(message, keyword){
+      //Converts keyword and message to lowercase
       var newMessage = message.toLowerCase();
       var newKeyword = keyword.toLowerCase();
+      //Calculates the amount of rows our matrix will have
       var rows = newMessage.length / newKeyword.length;
-
+      //We generate a matrix used for encryption
       var matrix = columnar.generateEncryptionMatrix(newKeyword, newMessage, newMessage.length);
+      //We encrypt the matrix by running it through the columnar transposition
       var encryptedMatrix = columnar.columnarFunction(newKeyword, matrix, rows);
+      //Reads down the column for the actual pairs
       var finalPairs = columnar.encryptionPairs(encryptedMatrix, keyword.length, rows);
 
       return finalPairs;
     }
 
 
+    //Columnar Decryption function
+    //Takes in the decryption message and keyword
     columnar.decrypt = function(message, keyword){
+      //Calculates the amount of rows our matrix will have
       var rows = message.length / keyword.length;
+      //We generate a matrix used for encryption
       var matrix = columnar.generateDecryptionMatrix(keyword, message, message.length);
       var output = columnar.decryptionColumnar(keyword, matrix, rows);
 

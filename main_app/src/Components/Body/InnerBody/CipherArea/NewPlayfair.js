@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './CipherArea.css';
 import Table from './Table';
-import { adfgx } from './ADFGX.js';
 import { playfair } from './Playfair.js'
 
 /*
@@ -38,7 +37,6 @@ class NewPlayfair extends Component {
                 <div id="input_textArea_div" className="input_text_area">
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
                     <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Decrypt" rows="25" cols="25"></textarea><br/>
-                    <textarea className="inputOutput_textArea" id="keyword_area" placeholder="Keyword" rows="1" cols="25"></textarea>
                     <textarea className="inputOutput_textArea" id="keysquare_area" placeholder="Keysquare" rows="1" cols="25"></textarea>
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
@@ -75,13 +73,9 @@ export default NewPlayfair;
 
 
 const Encrypt = (props) => {
- //adfgx.start(props.inputKeyword)
- //var temp = adfgx.encrypt(props.inputText)
- var keyword = document.getElementById("keyword_area").value;
  var keysquare = document.getElementById("keysquare_area").value;
  var encryptionWord = document.getElementById("input_textArea").value;
- //var temp2 = readfgx.encryption(encryptionWord, keysquare, keyword);
- var temp = playfair.encrypt("hammer", "monarchybdefgiklpqstuvwxz");
+ var temp = playfair.encrypt(encryptionWord, keysquare);
  return (
      <OutputTextarea message={temp} />
  );
@@ -90,15 +84,9 @@ const Encrypt = (props) => {
 
 
 const Decrypt = (props) => {
-  //adfgx.start(props.inputKeyword)
-  //var temp = readfgx.translate(props.inputText)
-  //var temp2 = readfgx.generateMatrix("abcdefghiklmnopqrstuvwxyz" )
-  var keyword = document.getElementById("keyword_area").value;
   var keysquare = document.getElementById("keysquare_area").value;
   var decryptionWord = document.getElementById("input_textArea2").value;
-  //var temp2 = readfgx.decryption("XFDDDDFAFGXG", keysquare, keyword);
-  //var temp2 = readfgx.decryption(decryptionWord, keysquare, keyword);
-  var temp2 = playfair.encrypt("boaukm", "monarchybdefgiklpqstuvwxz");
+  var temp2 = playfair.encrypt(decryptionWord, keysquare);
     return (
         <OutputTextarea message={temp2} />
     );

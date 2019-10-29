@@ -33,18 +33,6 @@ class NewColumnar extends Component {
         return (
             <div id="railFence_div" className="specific_cipher_class">
                 <h1>Columnar</h1>
-                <br/><h4  style={{color: 'white'}}>History: The columnar Cipher was used by the German Army during WWI as a field cipher.<br/>
-                This cipher combines a Polybius square and single columnar transposition.<br/>
-                Using the 5 letters columnar we can encode any message using the english alphabet, replacing j with i.<br/>
-                The letters columnar were all chosen due to their distinctness when sent over morse code, this was to reduce chances of human error.</h4><br/>
-
-                <br/><h4  style={{color: 'white'}}>Steps:<br/>
-                1. Build a 5x5 table to represent columnar<br/>
-                2. Encode the plaintext using the matrix, and it will be of AADD.. form<br/>
-                3. Write the code word with the enciphered plaintext underneath<br/>
-                4. Perform a columnar transposition<br/>
-                5. Read the final ciphertext off in columns<br/>
-                </h4><br/>
 
                 <div id="input_textArea_div" className="input_text_area">
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>

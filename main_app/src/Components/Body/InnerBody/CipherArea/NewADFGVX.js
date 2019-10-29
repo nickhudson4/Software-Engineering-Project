@@ -28,20 +28,10 @@ class NewADFGVX extends Component {
     }
 
 
-
     render() {
         return (
             <div id="railFence_div" className="specific_cipher_class">
                 <h1>ADFGVX</h1>
-                <br/><h4  style={{color: 'white'}}>History :In cryptography, the ADFGVX cipher was a field cipher used by the German Army during World War I. ADFGVX was in fact an extension of an earlier cipher called the adfgvx cipher. Invented by Colonel Fritz Nebel and introduced in March 1918, the cipher was a fractionating transposition cipher which combined a modified Polybius square with a single columnar transposition. The cipher is named after the six possible letters used in the ciphertext: A, D, F, G, V and X. These letters were chosen deliberately because they sound very different from each other when transmitted via morse code. The intention was to reduce the possibility of operator error.</h4><br/>
-
-                <br/><h4  style={{color: 'white'}}>Steps:<br/>
-                1. Build a 5x5 table to represent ADFGVX<br/>
-                2. Encode the plaintext using the matrix, and it will be of AADD.. form<br/>
-                3. Write the code word with the enciphered plaintext underneath<br/>
-                4. Perform a columnar transposition<br/>
-                5. Read the final ciphertext off in columns<br/>
-                </h4><br/>
 
                 <div id="input_textArea_div" className="input_text_area">
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
@@ -83,29 +73,21 @@ export default NewADFGVX;
 
 
 const Encrypt = (props) => {
- //adfgx.start(props.inputKeyword)
- //var temp = adfgx.encrypt(props.inputText)
  var keyword = document.getElementById("keyword_area").value;
  var keysquare = document.getElementById("keysquare_area").value;
  var encryptionWord = document.getElementById("input_textArea").value;
- //var temp2 = readfgvx.encryption(encryptionWord, keysquare, keyword);
- //var temp = props.inputText
- var temp2 = readfgvx.encryption(encryptionWord, keysquare, keyword);
+ var temp = readfgvx.encryption(encryptionWord, keysquare, keyword);
  return (
-     <OutputTextarea message={temp2} />
+     <OutputTextarea message={temp} />
  );
 }
 
 
 
 const Decrypt = (props) => {
-  //adfgx.start(props.inputKeyword)
-  //var temp = readfgvx.translate(props.inputText)
-  //var temp2 = readfgvx.generateMatrix("abcdefghiklmnopqrstuvwxyz" )
   var keyword = document.getElementById("keyword_area").value;
   var keysquare = document.getElementById("keysquare_area").value;
   var decryptionWord = document.getElementById("input_textArea2").value;
-  //var temp2 = readfgvx.decryption("XFDDDDFAFGXG", keysquare, keyword);
   var temp2 = readfgvx.decryption(decryptionWord, keysquare, keyword);
     return (
         <OutputTextarea message={temp2} />

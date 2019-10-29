@@ -1,267 +1,340 @@
-//TwoSquare.js file
+//Encryption works
+//Need comments
+//twosquare.js
+//Look at the same column condition
 
-//twosquare class declaration
+//Reformat to not store values, only executable functions except for some
 export var twosquare = (function () {
 
     function twosquare() {
     }
 
-    //Our alphabet for setting our matricies, i is omitted    
-    var alphabet = ['a','b','c','d','e','f','g','h','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    //Our 2 matricies used for 2 tSquare
-    let myarr1 = [];
-    let myarr2 = [];
-    let codedArray = [];
-    let decodedArray = [];
-    let outputPair = [2];
+    //Our encryption function for twosquare
+    twosquare.encrypt = function(message, keysquare1, keysquare2){
+      //Returns our keysquare once we filter out j
+      var newKeysquare1 = twosquare.jFilter(keysquare1);
+      var newKeysquare2 = twosquare.jFilter(keysquare2);
+      var encryptionMessage = twosquare.messageEqualizer(message);
+      //Error checking
+      if (newKeysquare1.length == 35){
+        return "There was a problem with the Keysquare, cannot Encrypt"
+      }
+      if (newKeysquare2.length == 35){
+        return "There was a problem with the Keysquare2, cannot Encrypt"
+      }
+      else {
+        //Checks for duplicate letters in our keysquare
+        var truth1 = twosquare.duplicateChecker(newKeysquare1);
+        var truth2 = twosquare.duplicateChecker(newKeysquare2);
+        //Error Checking
+        if (truth1 == 1){
+          return "There was a duplicate letter somewhere in your keysquare1"
+        }
+        if (truth2 == 1){
+          return "There was a duplicate letter somewhere in your keysquare2"
+        }
+        else {
+          //We replace all j's with i's in our encryption message
+          var newMessage = twosquare.iAdder(encryptionMessage);
+          //We remove any duplicate letters by replacing them with x, in our encryption message
+          newMessage = twosquare.duplicateRemover(newMessage);
+          //We generate our 5x5 matrix used for encryption
+          var matrix1 = twosquare.generateMatrix(newKeysquare1);
+          //We generate our 5x5 matrix used for encryption
+          var matrix2 = twosquare.generateMatrix(newKeysquare2);
+          //We recieve back the full set of coordinates for ever letter cooresponding to our matricies
+          var fullCoordinates = twosquare.coordinates(newMessage, matrix1, matrix2);
+          //Errors start here
+          //We recieve the diagonal letter in our matrix for every letter in our encryption word
+          var diagonals = twosquare.getDiagonals(fullCoordinates, matrix1, matrix2);
 
-    //Calculated x coordinate of first matrix
-    var x1;
-    //Calculated y coordinate of first matrix
-    var y1;
-    //Calculated x coordinate of second matrix
-    var x2;
-    //Calculated x coordinated of second matrix
-    var y2;
-    //Desired search value
-    var target;
-    //The keyword in our first matrix
-    var keyword1 = 'math';
-    //The keyword in our second matrix
-    var keyword2 = 'cid';
-    var kword;
-
-    //Returns the keyword of our first matrix
-    twosquare.keyword1f = function(){
-    return keyword1;
-    }
-    //Returns the keyword of our second matrix
-    twosquare.keyword2f = function(){
-    return keyword2;
-    }
-
-    //Returns word put in for encryption
-    var encryptionWord;
-    twosquare.eWord = function(){
-      return encryptionWord;
-    }
-
-
-
-  //Encrypts a word
-  twosquare.encrypt = function(word){
-    let searchPair = [];
-
-    if(word.length % 2 != 0)
-    {
-      word = word + 'x';
-    }
-    encryptionWord = word;
-    for(let i = 0; i < word.length; ++i, ++i)
-    {
-        searchPair[0] = word[i];
-        searchPair[1] = word[i+1];
-        twosquare.coord(searchPair);
-        var temp = twosquare.letterPair();
-        codedArray.push(temp);
-    }
-
-      return codedArray;
+          return diagonals;
+        }
+      }
   }
 
-    //Beings our 2 square program
-    twosquare.start = function(){
-      twosquare.setMatrix1(keyword1);
-      twosquare.setMatrix2(keyword2);
-      twosquare.coord("cy")
-      var temp = twosquare.letterPair();
-      //return temp;
+  //Evens out an odd encryption message by adding x to the end
+  twosquare.messageEqualizer = function(message){
+    if(message.length % 2 != 0)
+    {
+      message = message + 'x';
+    }
+    return message;
+  }
+
+
+    //Takes in the full set of coordinates for our message, and the matrix
+    twosquare.getDiagonals = function(fullCoordinates, topMatrix, bottomMatrix){
+        var coordinates = [];
+        var fullCounter = [];
+        var i = 0;
+        var n = 0;
+
+        //Runs for the length of our coordinate list
+        for (; n < fullCoordinates.length;){
+          //Start by setting our 2 xy values into a list
+          coordinates[0] = fullCoordinates[n];
+          ++n;
+          coordinates[1] = fullCoordinates[n];
+          ++n;
+          coordinates[2] = fullCoordinates[n];
+          ++n;
+          coordinates[3] = fullCoordinates[n];
+          ++n;
+
+          //Sends that list to a diagonal function
+          //Returns the 2 letters at the diagonal points
+          var revLets = twosquare.diagonal(coordinates, topMatrix, bottomMatrix);
+          //Stores the 2 letters into a full array
+          fullCounter[i] = revLets[0];
+          ++i;
+          fullCounter[i] = revLets[1];
+          ++i;
+        }
+
+        return fullCounter;
     }
 
 
+  //Returns whatever character is at the diagonal of the 2 xy points given
+  //Takes in 2 xy coordinates and our matrix
+  twosquare.diagonal = function(coordinates, topMatrix, bottomMatrix){
+    var x1 = coordinates[0];
+    var y1 = coordinates[1];
+    var x2 = coordinates[2];
+    var y2 = coordinates[3];
+    var letters = [];
+//    if (y1 != y2) {
+//      letters[0] = bottomMatrix[y2][x1];
+//      letters[1] = topMatrix[y1][x2];
+//    }
+//    else {
+      letters[1] = bottomMatrix[y2][x1];
+      letters[0] = topMatrix[y1][x2];
+  //  }
 
-    //Determines coordinates based on the input 2 letters from the message
-    twosquare.coord = function(pair)
-    {
-      for(let i=0; i < 5; ++i)
-        {
-          for(let j=0; j < 5; ++j)
-          {
-            if (myarr1[i][j] === pair[0])
-            {
-              x1=i;
-              y1=j;
-            }
-            if (myarr2[i][j] === pair[1])
-            {
-              x2=i;
-              y2=j;
-            }
+    return letters;
+  }
+
+
+  //Rreturns a full list of coordinates for every letter in our encryption message
+  twosquare.coordinates = function(message, topMatrix, bottomMatrix){
+    var fullCoordinates = [];
+    var coordinates = [];
+    var n = 0;
+
+    //Gets the x and y coordinate for every letter in our message
+    for (let i = 0; i < message.length; ++i){
+      //Search function which returns the x y coordinates for a letter
+      if (i % 2 == 0){
+        coordinates = twosquare.coordinateSearch(message[i], topMatrix);
+      }
+      //Odd letters in the message has their coordinates searched in  the bottom matrix
+      else {
+        coordinates = twosquare.coordinateSearch(message[i], bottomMatrix);
+      }
+      fullCoordinates[n] = coordinates[0];
+      ++n;
+      fullCoordinates[n] = coordinates[1];
+      ++n;
+    }
+    //Returns a full list of coordinates
+    return fullCoordinates;
+  }
+
+
+
+
+    //Takes in plaintext word and keysquare
+    twosquare.coordinateSearch = function(letter, matrix){
+      let coordinates = [];
+      var truth = 0;
+
+      //Search funchtion which stores x and y into an array
+      for (let i = 0; i < 5 && truth == 0; ++i){
+        for (let j = 0; j < 5 && truth == 0; ++j){
+          if (matrix[i][j] == letter){
+            coordinates[0] = j;
+            coordinates[1] = i;
+            truth = 1;
           }
         }
       }
+      return coordinates;
+  }
 
 
 
-    //Returns the input search pair
-    twosquare.letterPair = function(){
-      let pair = [2];
-      pair[0] = myarr1[x2][y1];
-      pair[1] = myarr2[x1][y2];
-      return pair;
+
+    //Evens out an odd encryption message by adding x to the end
+    twosquare.messageEqualizer = function(message){
+      if(message.length % 2 != 0)
+      {
+        message = message + 'x';
+      }
+      return message;
     }
 
 
-    //Returns our first matrix
-    twosquare.first = function()
-    {
-      return myarr1[x1][y2];
-    }
-    //Returns our second matrix
-    twosquare.second = function()
-    {
-      return myarr2[x2][y1];
+    //Replaces any duplicates that are next to each other with x
+    twosquare.duplicateRemover = function (word){
+
+      for (let i = 0; i < word.length-1; ++i){
+        if (word[i] == word[i+1] && word[i+1] != 'x'){
+            word[i+1] = 'x';
+        }
+      }
+      return word;
     }
 
 
-  //Filters through for i
-  twosquare.filter = function(word){
-    let buff = []
-    for (let i=0; i < word.length; ++i){
-      if (word[i] === 'i'){
-        buff[i] = 'j';
+    //Checks for duplicate letters in our keysquare and returns 1 if it finds one
+    twosquare.duplicateChecker = function (keysquare){
+      var truth = 0;
+
+      for (let i = 0; i < keysquare.length && truth == 0; ++i){
+        for (let j = i+1; j < keysquare.length && truth == 0; ++j){
+          if (keysquare[i] == keysquare[j]){
+              truth = 1;
+          }
+        }
+      }
+      return truth;
+    }
+
+
+
+    //This function replaces i with j in any encryption message
+    twosquare.iAdder = function (input){
+      var message = input.toLowerCase();
+      let buff = [];
+      for (let i = 0; i < message.length; ++i){
+        if (message[i] == 'j'){
+          buff[i] = 'i';
+        }
+        else{
+          buff[i] = message[i];
+        }
+      }
+
+      return buff;
+    }
+
+
+
+    //This function removes j from a keysquare
+    twosquare.jRemover = function(square){
+      var keysquare = square.toLowerCase();
+      let buff = []
+      var truth = 0;
+
+      //This part checks the keysquare for j
+      for (let i = 0; i < keysquare.length && truth != 2; ++i){
+        if (keysquare[i] == 'j'){
+              truth = 1;
+        }
+        if (truth == 0){
+            buff[i] = keysquare[i];
+        }
+        if (truth == 1){
+            buff[i] = keysquare[i+1];
+            if (i == 24){
+              truth = 2;
+            }
+        }
+      }
+      return buff;
+    }
+
+    //Filters for length and removes j
+    twosquare.jFilter = function(keysquare){
+      var newKeysquare = twosquare.jRemover(keysquare);
+
+      if (newKeysquare.length != 25){
+        return "Invalid Amount of Keysquare Letters";
       }
       else{
-        buff[i] = word[i];
+        return newKeysquare;
       }
     }
-      return buff;
-  }
-
-
-  //Returns the first and second array without the keyword letters
-  twosquare.newArray1 = function(word){
-    let array = [];
-    var truth;
-
-  for (let t=0; t < alphabet.length; ++t){
-    truth = 0;
-    for (let j=0; j < kword.length; ++j){
-        if (alphabet[t] === kword[j]){
-          truth = 1;
-        }
-    }
-    
-    if (truth != 1){
-      array.push(alphabet[t]);
-    }
-  }
-  return array;
-}
 
 
 
+  //Parses through the alphabet array, and removes all letters that are in our keyword
+  twosquare.keywordRemover = function(keyword){
+      var kword = keyword;
+      let array = [];
+      var truth;
 
-  //Creates the first matrix
-  twosquare.setMatrix1 = function(){
-  //Sets our keyword value
-  var keyword = twosquare.filter(keyword1);
-  kword = keyword;
-  var tempArr1 = twosquare.newArray1();
-  var temp1 = 0;
-  var temp2 = 0;
-  var temp3 = 0;
-  var truth = 0;
-
-  //Outer loop
-  for(let a=0; a < 5; a++){
-    //Declares an array, named row
-    let row = []
-    //Inner loop
-    for(let b=0; b < 5; b++){
-      var col;
+    for (let t=0; t < kword.length; ++t){
       truth = 0;
-      //Our first if statement inputs our keyword into our matrix
-      if (temp1 < keyword.length)
-      {
-        truth = 0;
-        col = keyword[temp1];
-        temp1++;
+      for (let j=0; j < kword.length; ++j){
+          if (kword[t] === kword[j]){
+            truth = 1;
+          }
       }
-      //Second if statement inputs our alphabet into our matrix
-      else if (temp2 < tempArr1.length){
-        col = tempArr1[temp2];
-        ++temp2;
+      if (truth != 1){
+        array.push(kword[t]);
       }
-      //Else we input our numbers 0-9
-      else
-      {
-        col = tempArr1[temp3];
-        ++temp3;
-      }
-      //Insert our value into our array
-      row.push(col);
     }
-    //Insert that array into an array of arrays
-    myarr1.push(row);
+    //Returns an alphabet array with the keyword removed
+    return array;
   }
-  //Returns the matrix
-  return myarr1;
-}
 
 
-  //Generates second matrix
-  twosquare.setMatrix2 = function(){
-    //Sets our keyword value
-  var keyword = twosquare.filter(keyword2);
-  kword = keyword;
-  var tempArr2 = twosquare.newArray1();
-  var temp1 = 0;
-  var temp2 = 0;
-  var temp3 = 0;
-  var truth = 0;
 
-  //Outer loop
-  for(let a=0; a < 5; a++){
-    //Declares an array, named row
-    let row = []
-    //Inner loop
-    for(let b=0; b < 5; b++){
-      var col;
-      truth = 0;
-      //Our first if statement inputs our keyword into our matrix
-      if (temp1 < keyword.length)
-      {
-        truth = 0;
-        col = keyword[temp1];
-        temp1++;
-      }
-      //Second if statement inputs our alphabet into our matrix
-      else if (temp2 < tempArr2.length){
-        col = tempArr2[temp2];
-        ++temp2;
-      }
-      //Else we input our numbers 0-9
-      else
-      {
-        col = tempArr2[temp3]
-        ++temp3;
-      }
-      //Insert our value into our array
-      row.push(col);
+  //Generate a keysquare matrix
+  twosquare.generateMatrix = function(keysquare)
+  {
+    //Generates 5 rows into a temp matrix
+    var tempArray = [];
+    for (var i = 0; i < 5; i++){
+      tempArray[i] = [];
     }
-    //Insert that array into an array of arrays
-    myarr2.push(row);
+    //Fills our 5x5 matrix with our keysquare
+    var i = 0;
+    for (let a = 0; a < 5; a++)
+    {
+      for (let b = 0; b < 5; b++)
+      {
+          tempArray[a][b] = keysquare[i];
+          ++i;
+      }
+    }
+    //Returns a 5x5 matrix formed by our keysquare
+    return tempArray;
   }
-  //Returns the matrix
-  return myarr2;
+
+
+  //Generate a keysquare matrix
+  twosquare.generateMatrix2 = function(keysquare)
+  {
+    //Generates 5 rows into a temp matrix
+    var tempArray = [];
+    for (var i = 0; i < 5; i++){
+      tempArray[i] = [];
+    }
+    //Fills our 5x5 matrix with our keysquare
+    var i = 0;
+    for (let a = 0; a < 5; a++)
+    {
+      for (let b = 0; b < 5; b++)
+      {
+          tempArray[a][b] = keysquare[i];
+          ++i;
+      }
+    }
+    //Returns a 5x5 matrix formed by our keysquare
+    return tempArray;
   }
 
 
-    twosquare.main = function (args) {
-    };
-    return twosquare;
-}());
 
-twosquare["__class"] = "twosquare";
-twosquare.main(null);
+
+      twosquare.main = function (args) {
+      };
+      return twosquare;
+  }());
+
+  twosquare["__class"] = "twosquare";
+  twosquare.main(null);

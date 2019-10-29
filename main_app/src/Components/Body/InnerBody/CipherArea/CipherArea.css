@@ -1,23 +1,17 @@
 #railFence_div{
   /* float: left; */
-  /* text-align: center; */
-  /* padding: 50px 0px 100px 300px; */
+  text-align: center;
+  padding: 50px 0px 100px 300px;
   
 } 
 
-.specific_cipher_class {
-  /* float: left; */
-  /* padding-left: 300px; */
-  text-align: center;
-}
 .specific_cipher_class h1{
   color: #FF00D0;
 }
 
 .inputOutput_textArea {
   background-color: #282828;
-  /* border: 1px solid #20a0e5; */
-  border: none;
+  border: 1px solid #20a0e5;
   color: wheat;
 }
 .specific_cipher_class button{
@@ -35,8 +29,7 @@
   /* color: #FF00D0; */
   background-color: #282828;
   color: white;
-  /* border: 1px solid #20a0e5; */
-  border: none;
+  border: 1px solid #20a0e5;
 }
 
 .actions_div {
@@ -45,7 +38,6 @@
 
 #input_textArea_div {
   text-align: center;
-  /* padding-left: 100px; */
 }
 
 #output_textArea_div {
