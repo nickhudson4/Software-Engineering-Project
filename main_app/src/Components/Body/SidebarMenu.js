@@ -16,7 +16,7 @@ class SidebarMenu extends Component {
             <h1>Cryptography<br/>Explorer</h1>
             {/* <Logo/> */}
 
-            
+
             <h3 onClick={() => this.props.onClickFunc("mono")}>Mono-Alphabetic Substitution</h3>
             <h3 onClick={() => this.props.onClickFunc("vig")}>Vigenre Cipher</h3>
             <h3 onClick={() => this.props.onClickFunc("scy")}>Scytale</h3>
