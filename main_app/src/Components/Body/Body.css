@@ -12,10 +12,15 @@
   top: 0; /* Stay at the top */
   left: 0;
   overflow-x: hidden; /* Disable horizontal scroll */
+  overflow-y: scroll; /* Disable horizontal scroll */
   float: left;
   /* display: block; */
   /* padding-top: 20px */
 }
+
+#sideMenu_div::-webkit-scrollbar { 
+  display: none; 
+} 
 
 #sideMenu_div h1 {
   color: #FF00D0;
@@ -57,6 +62,8 @@
   background-color: #00D0FF;
   top: 0; 
   height: 50px;
+  width: 100%;
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
 }
 
 #topMenu_div h3 {
@@ -69,5 +76,10 @@
 
   /* Remove all default button properties */
 	cursor: pointer;
+  
+}
+#topMenu_div h3:hover {
+  /* background-color: #383838; */
+  color: #777777;
   
 }
