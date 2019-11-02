@@ -1,126 +1,170 @@
-//TwoSquare.js file
+//Vigenere.js
 
-//twosquare class declaration
 export var vigenere = (function () {
-
     function vigenere() {
     }
 
-    //Our alphabet for setting our matricies, i is omitted    
-    var alphabet = ['a','b','c','d','e','f','g','h', 'i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    //Our 2 matricies used for 2 tSquare
-    let myarr = [];
-    let codedArray = [];
-    let decodedArray = [];
-    let tempArray = [];
-    let outputPair = [2];
-
-    //Calculated x coordinate of first matrix
-    let xArray = [];
-    let arrayX = [];
-    let yArray = [];
-    let arrayY = [];
-    //Calculated y coordinate of first matrix
-    var xx;
-    var yy;
-    //Desired search value
-    var target;
-    //The keyword in our first matrix
-    var keyword = 'keyword';
-    var keystream;
-
-    //Returns the keyword of our first matrix
-    vigenere.keywordf = function(){
-    return keyword;
-    }
-
-    //Returns the word input for encryption
-    var encryptionWord;
-    vigenere.eWord = function(){
-      return encryptionWord;
-    }
-
-    //Encrypts a word
-    vigenere.encrypt = function(word){
-      vigenere.coordinate(word);
-      encryptionWord = word;
-      for(let i = 0; i < xArray.length; ++i)
-      {
-        var x = xArray[i];
-        var y = yArray[i];
-        codedArray.push(vigenere.search(x,y))
+    //Generates an array based on the input keysquare
+    vigenere.generateArray = function(keyword){
+      let temp = [];
+      for(let i = 0; i < 26; ++i){
+          temp[i] = keyword[i];
       }
-
-    return codedArray;
-  }
-
-
-    //Begins the vigenere process
-    vigenere.start = function(){
-      vigenere.setMatrix();
-      var temp = vigenere.search(19,7);
-      //return temp;
+      //Returns keysquare as an array
+      return temp;
     }
 
 
-
-  //Calculates the coordinates for input word
-  vigenere.coordinate = function(word){
-      if (keyword.length < word.length){
-        keystream = keyword;
-        var temp = 0;
-        for (let i = keyword.length; i < word.length; ++i){
-          keystream = keystream + keyword[temp];
-          if (temp > keyword.length){
-            temp = 0;
+    //Searches the input keysquare array, for the desired letter
+    vigenere.arraySearch = function(letter, array){
+      var truth = 0;
+      var location;
+      //Searches the array for the desired letter's location
+      for (let i = 0; i < 26 && truth == 0; ++i){
+          if (array[i] == letter){
+            ++truth;
+            location = i;
           }
-          ++temp;
-        }
       }
-      else{
-        keystream = keyword;
-      }
-
-      for(let i=0; i < word.length; ++i){
-        xArray[i] = word[i].charCodeAt(0) - 97;
-        yArray[i] = keystream[i].charCodeAt(0) - 97;
-      }
-  }
-
-  //Searches through the array and retursn what's at the desired point
-  vigenere.search = function(x, y){
-    return myarr[x][y];
-  }
-
-
-  //Creates the matrix
-  vigenere.setMatrix = function(){
-  //Outer loop
-  var offset = 0;
-  var temp;
-  for(let a=0; a < 26; a++){
-    //Declares an array, named row
-    let row = []
-    //Inner loop
-    temp = 0;
-    for(let b=0; b < 26; b++){
-      //Insert our value into our array
-      if (b + offset < 26){
-        row.push(alphabet[b+offset]);
-      }
-      if (b + offset > 26){
-        row.push(alphabet[temp])
-        ++temp;
-      }
-
+      //Returns the location of the letter in the array
+      return location;
     }
-    ++offset;
-    //Insert that array into an array of arrays
-    myarr.push(row);
-  }
-  //Returns the matrix
-  return myarr;
-}
+
+
+    //Encrypts the input message, also takes in the alphabet as an array, and the keyword as an array
+    vigenere.encryptMessage = function(message, alphabetArray, keywordArray){
+      let encryption = [];
+      //For every letter in the message it encrypts
+      for (let i = 0; i < message.length; ++i){
+        //Searches for the location of the letter in the alphabet array
+        var location = vigenere.arraySearch(message[i], alphabetArray);
+        encryption[i] = keywordArray[location];
+      }
+      //Returns fully encrypted message
+      return encryption;
+    }
+
+
+
+    //Decrypts the input message, also takes in the alphabet as an array, and the keyword as an array
+    vigenere.decryptMessage = function(message, alphabetArray, keywordArray){
+      let decryption = [];
+      //For every letter in the message it decrypts
+      for (let i = 0; i < message.length; ++i){
+        //Searches for hte location of the letter in the keyword array
+        var location = vigenere.arraySearch(message[i], keywordArray);
+        decryption[i] = alphabetArray[location];
+      }
+      //Returns fully decrypted message
+      return decryption;
+    }
+
+
+
+    //Creates a keystream using the desired keyword
+    vigenere.formKeystream = function(keyword, length){
+      //If the keyword length is less than the length of the message
+      if (keyword.length < length)
+      {
+        var keystream = [];
+        var n = 0;
+        //Keeps repeating the keyword into a keystream
+        for (let i = 0; i < length; ++i){
+          keystream[i] = keyword[n];
+          ++n;
+                //Everytime we hit the end of the keyword, we loop back
+                if (n >= keyword.length){
+                  n = 0;
+                }
+        }
+        //Returns keystream
+        return keystream;
+      }
+      //Just returns the keyword if it's longer or equal to the message
+      else
+      {
+          return keyword;
+      }
+    }
+
+
+
+    //By adding the locations together we encode
+    vigenere.adder = function(keystream, newMessage, alphabet){
+      let encryptedWord = [];
+      //Encodes every letter of the message
+      for (let i = 0; i < newMessage.length; ++i){
+        //Calculates the location of the current keystream letter in the alphabet
+        var num1 = vigenere.arraySearch(keystream[i], alphabet);
+        //Calculates the location of the current message letter in the alphabet
+        var num2 = vigenere.arraySearch(newMessage[i], alphabet);
+        //Adds the 2 together and mod 26
+        var num3 = (num2 + num1) % 26;
+        //Inserts whatever location in the alphabet that is into the Encrypted Word
+        encryptedWord[i] = alphabet[num3];
+      }
+      //Returns the fully encrypted word
+      return encryptedWord;
+    }
+
+
+
+
+    //By subtracting the locations together we decode
+    vigenere.subtractor = function(keystream, ciphertext, alphabet){
+      let encryptedWord = [];
+      //Decodes every letter of the message
+      for (let i = 0; i < ciphertext.length; ++i){
+        //Calculates the location of the current keystream letter in the alphabet
+        var num1 = vigenere.arraySearch(keystream[i], alphabet);
+        //Calculates the location of the current message letter in the alphabet
+        var num2 = vigenere.arraySearch(ciphertext[i], alphabet);
+        //Subtracts the 2
+        var num3 = (num2 - num1);
+        //If we get a negative number, we add 26
+        if (num3 < 0){
+          num3 = num3 + 26;
+        }
+        //We mod that result by 26
+        num3 = num3 % 26;
+        //Inserts whatever location in the alphabet that is into the decrypted word
+        encryptedWord[i] = alphabet[num3];
+      }
+      //Returns the fully decrypted word
+      return encryptedWord;
+    }
+
+
+
+    //Encrypts the desired message, takes in keyword and encryption message
+    vigenere.encrypt = function(keyword, message){
+      //Produces keystream, by sending the lowercase keyword, and the length of the message
+      var keystream = vigenere.formKeystream(keyword.toLowerCase(), message.length);
+      //Converts messaage to lowercase
+      var newMessage = message.toLowerCase();
+      //Creates an array out of the alphabet
+      var alphabet = vigenere.generateArray("abcdefghijklmnopqrstuvwxyz");
+      //Creates fully encrypted word, by sending the keystream, message, and alphabet as an array
+      var fullEncryption = vigenere.adder(keystream, newMessage, alphabet);
+      //Returns the fully encrypted message
+      return fullEncryption;
+    }
+
+
+    //Decrypts the message
+    vigenere.decrypt = function(keyword, message){
+      //Stores keystream, sends keyword in lowercase form and the length of the message
+      var keystream = vigenere.formKeystream(keyword.toLowerCase(), message.length);
+      //Converts message to lowercase
+      var newMessage = message.toLowerCase();
+      //Converts the alphabet into an array
+      var alphabet = vigenere.generateArray("abcdefghijklmnopqrstuvwxyz");
+      //Creates the fully decrypted word, by sending the keystream, message, and alphabet as an array
+      var fullDecryption = vigenere.subtractor(keystream, newMessage, alphabet);
+      //Returns the fully decrypted array
+      return fullDecryption;
+    }
+
 
 
     vigenere.main = function (args) {

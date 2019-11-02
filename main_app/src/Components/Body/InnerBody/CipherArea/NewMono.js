@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './CipherArea.css';
 import Table from './Table';
-import { vigenere } from './Vigenere.js'
+import { mono } from './MonoAlphSub.js'
 
 /*
     Renders specific component based on cipher chosen.
@@ -16,7 +16,7 @@ t      i     e       n
 
 */
 
-class NewVigenere extends Component {
+class NewMono extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -32,12 +32,12 @@ class NewVigenere extends Component {
     render() {
         return (
             <div id="railFence_div" className="specific_cipher_class">
-                <h1>Vigenere</h1>
+                <h1>Mono-Alphabetic Substitution</h1>
 
                 <div id="input_textArea_div" className="input_text_area">
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
                     <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Decrypt" rows="25" cols="25"></textarea><br/>
-                    <textarea className="inputOutput_textArea" id="keyword_area" placeholder="Keyword" rows="1" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="keysquare_area" placeholder="Cipher Alphabet" rows="1" cols="25"></textarea>
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
                         <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
@@ -69,15 +69,15 @@ class NewVigenere extends Component {
   }
 }
 
-export default NewVigenere;
+export default NewMono;
 
 
 const Encrypt = (props) => {
- //vigenere.start(props.inputKeyword)
- //var temp = vigenere.encrypt(props.inputText)
- var keyword = document.getElementById("keyword_area").value;
+ //mono.start(props.inputKeyword)
+ //var temp = mono.encrypt(props.inputText)
+ var cipherAlphabet = document.getElementById("keysquare_area").value;
  var encryptionWord = document.getElementById("input_textArea").value;
- var temp = vigenere.encrypt(keyword, encryptionWord);
+ var temp = mono.encrypt(cipherAlphabet, encryptionWord);
  //var temp = props.inputText
  return (
      <OutputTextarea message={temp} />
@@ -88,13 +88,13 @@ const Encrypt = (props) => {
 
 
 const Decrypt = (props) => {
-  //vigenere.start(props.inputKeyword)
-  //var temp = vigenere.translate(props.inputText)
-  //var temp2 = vigenere.generateMatrix("abcdefghiklmnopqrstuvwxyz" )
-  var keyword = document.getElementById("keyword_area").value;
+  //mono.start(props.inputKeyword)
+  //var temp = mono.translate(props.inputText)
+  //var temp2 = mono.generateMatrix("abcdefghiklmnopqrstuvwxyz" )
+  var cipherAlphabet = document.getElementById("keysquare_area").value;
   var decryptionWord = document.getElementById("input_textArea2").value;
-  //var temp2 = vigenere.decryption("XFDDDDFAFGXG", keysquare, keyword);
-  var temp2 = vigenere.decrypt(keyword, decryptionWord);
+  //var temp2 = mono.decryption("XFDDDDFAFGXG", keysquare, keyword);
+  var temp2 = mono.decrypt(cipherAlphabet, decryptionWord);
     return (
         <OutputTextarea message={temp2} />
     );
