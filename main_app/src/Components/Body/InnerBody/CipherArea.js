@@ -9,6 +9,11 @@ import NewTwoSquare from './CipherArea/NewTwoSquare';
 import NewPlayfair from './CipherArea/NewPlayfair';
 import NewVigenere from './CipherArea/NewVigenere';
 import NewColumnar from './CipherArea/NewColumnar';
+import NewMono from './CipherArea/NewMono';
+import NewAtbash from './CipherArea/NewAtbash';
+import NewKama from './CipherArea/NewKama';
+import NewEnigma from './CipherArea/NewEnigma';
+import NewHill from './CipherArea/NewHill';
 /*
     Renders specific component based on cipher chosen
 */
@@ -30,7 +35,7 @@ const GetCipher = (props) => {
 
   if (props.whichCipher === 'mono'){
     return (
-      <MonoAlphSub/>
+      <NewMono/>
     );
   }
   else if (props.whichCipher === 'rail'){
@@ -71,6 +76,26 @@ const GetCipher = (props) => {
   else if (props.whichCipher === 'vig'){
     return (
       <NewVigenere/>
+    );
+  }
+  else if (props.whichCipher === 'at'){
+    return (
+      <NewAtbash/>
+    );
+  }
+  else if (props.whichCipher === 'kama'){
+    return (
+      <NewKama/>
+    );
+  }
+  else if (props.whichCipher === 'enig'){
+    return (
+      <NewEnigma/>
+    );
+  }
+  else if (props.whichCipher === 'hill'){
+    return (
+      <NewHill/>
     );
   }
   else { //Error return empty div
