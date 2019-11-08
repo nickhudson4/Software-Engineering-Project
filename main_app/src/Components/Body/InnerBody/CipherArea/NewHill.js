@@ -32,7 +32,7 @@ class NewColumnar extends Component {
     render() {
         return (
             <div id="railFence_div" className="specific_cipher_class">
-                <h1>Columnar</h1>
+                <h1>Hill</h1>
 
                 <div id="input_textArea_div" className="input_text_area">
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
@@ -79,7 +79,7 @@ const Encrypt = (props) => {
  var keyword = document.getElementById("keyword_area").value;
  var keysquare = document.getElementById("keysquare_area").value;
  var encryptionWord = document.getElementById("input_textArea").value;
- var temp2 = hill.encrypt("testinpu", "6,5,22,188,123", 3);
+ var temp2 = hill.encrypt("testinpu", "6,5,22,10,26,42,24,30,2", 3);
  //var temp = props.inputText
  return (
      <OutputTextarea message={temp2} />
