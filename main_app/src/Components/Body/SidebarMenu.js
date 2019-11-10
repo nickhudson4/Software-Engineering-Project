@@ -16,10 +16,10 @@ class SidebarMenu extends Component {
             <h1>Cryptography<br/>Explorer</h1>
             {/* <Logo/> */}
 
-            
+
             <h3 onClick={() => this.props.onClickFunc("mono")}>Mono-Alphabetic Substitution</h3>
-            <h3 onClick={() => this.props.onClickFunc("vig")}>Vigenre Cipher</h3>
-            <h3 onClick={() => this.props.onClickFunc("scy")}>Scytale</h3>
+            <h3 onClick={() => this.props.onClickFunc("vig")}>Vigenre</h3>
+            <h3 onClick={() => this.props.onClickFunc("at")}>Atbash</h3>
             <h3 onClick={() => this.props.onClickFunc("rail")}>Rail Fence</h3>
             <h3 onClick={() => this.props.onClickFunc("col")}>Columnar</h3>
             <h3 onClick={() => this.props.onClickFunc("two")}>Two Square</h3>
@@ -30,8 +30,8 @@ class SidebarMenu extends Component {
             <h3 onClick={() => this.props.onClickFunc("lfsr")}>LFSR</h3>
             <h3 onClick={() => this.props.onClickFunc("hill")}>Hill</h3>
             <h3 onClick={() => this.props.onClickFunc("enig")}>Enigma Machine</h3>
-            <h3 onClick={() => this.props.onClickFunc("rsa")}>RSA</h3>
-            <h3 onClick={() => this.props.onClickFunc("elg")}>ElGamal</h3>
+            <h3 onClick={() => this.props.onClickFunc("kama")}>Kamasutra</h3>
+            <h3 onClick={() => this.props.onClickFunc("scy")}>Affine</h3>
 
         </div>
     );
