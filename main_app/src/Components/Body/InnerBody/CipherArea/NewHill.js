@@ -35,10 +35,9 @@ class NewColumnar extends Component {
                 <h1>Hill</h1>
 
                 <div id="input_textArea_div" className="input_text_area">
-                    <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
-                    <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Decrypt" rows="25" cols="25"></textarea><br/>
-                    <textarea className="inputOutput_textArea" id="keyword_area" placeholder="Keyword" rows="1" cols="25"></textarea>
-                    <textarea className="inputOutput_textArea" id="keysquare_area" placeholder="Keysquare" rows="1" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="10" cols="25"></textarea><br/>
+                    <textarea className="inputOutput_textArea" id="keyword_area" placeholder="Matrix" rows="1" cols="25"></textarea><br/>
+                    <textarea className="inputOutput_textArea" id="size_area" placeholder="Size" rows="1" cols="2"></textarea>
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
                         <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
@@ -76,10 +75,10 @@ export default NewColumnar;
 const Encrypt = (props) => {
  //columnar.start(props.inputKeyword)
  //var temp = columnar.encrypt(props.inputText)
- var keyword = document.getElementById("keyword_area").value;
- var keysquare = document.getElementById("keysquare_area").value;
+ var matrix = document.getElementById("keyword_area").value;
  var encryptionWord = document.getElementById("input_textArea").value;
- var temp2 = hill.encrypt("testinpu", "6,5,22,10,26,42,24,30,2", 3);
+ var size = document.getElementById("size_area").value;
+ var temp2 = hill.encrypt(encryptionWord, matrix, size);
  //var temp = props.inputText
  return (
      <OutputTextarea message={temp2} />
@@ -93,8 +92,6 @@ const Decrypt = (props) => {
   //var temp = columnar.translate(props.inputText)
   //var temp2 = columnar.generateMatrix("abcdefghiklmnopqrstuvwxyz" )
   var keyword = document.getElementById("keyword_area").value;
-  var keysquare = document.getElementById("keysquare_area").value;
-  var decryptionWord = document.getElementById("input_textArea2").value;
   //var temp2 = columnar.decryption("XFDDDDFAFGXG", keysquare, keyword);
   var temp2 = hill.decrypt("ixeutptxnxst", "german");
     return (

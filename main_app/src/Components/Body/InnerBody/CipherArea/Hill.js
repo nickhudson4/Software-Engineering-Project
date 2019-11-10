@@ -18,7 +18,32 @@ export var hill = (function () {
       return tempArray;
     }
 
-    //Generate a keysquare matrix
+
+    hill.messageEncrypt = function(message, size, inputMatrix){
+
+      let buff = [];
+      let fullMessage = [];
+      let n = 0;
+      let n2 = 0;
+
+      for(let i = 0; i < message.length; ++i){
+        buff[n2] = message[i];
+        ++n2;
+        if (n2 == size){
+          var vector = hill.generateVector(buff, size);
+          var output = hill.multiplier(size, vector, inputMatrix);
+          for (let j = 0; j < size; ++j){
+            fullMessage[n] = output[j];
+            ++n;
+          }
+          n2 = 0;
+        }
+      }
+
+      return fullMessage;
+    }
+
+
     hill.multiplier = function(size, inputVector, inputMatrix)
     {
       var outputVector = [];
@@ -114,8 +139,8 @@ export var hill = (function () {
 
 
     //Evens out an odd encryption message by adding x to the end
-    hill.messageEqualizer = function(message){
-      if(message.length % 3 != 0)
+    hill.messageEqualizer = function(message, size){
+      while(message.length % size != 0)
       {
         message = message + 'x';
       }
@@ -124,14 +149,16 @@ export var hill = (function () {
 
 
 
-    hill.encrypt = function(message, number, size){
+    hill.encrypt = function(message, number, n){
+      var size = hill.numberParser(n);
       var array = hill.numberParser(number);
-      var newMessage = hill.messageEqualizer(message);
+      var newMessage = hill.messageEqualizer(message, size);
       var matrix = hill.generateMatrix(size);
       var keyMatrix = hill.setMatrix(size, array, matrix);
-      var vector = hill.generateVector("bco", 3);
-      var outputVector = hill.multiplier(size, vector, keyMatrix);
-      var translatedVector = hill.encryptMessage(outputVector,"abcdefghijklmnopqrstuvwxyz");
+      var output = hill.messageEncrypt(newMessage, size, keyMatrix);
+      //var vector = hill.generateVector("bco", 3);
+      //var outputVector = hill.multiplier(size, vector, keyMatrix);
+      var translatedVector = hill.encryptMessage(output,"abcdefghijklmnopqrstuvwxyz");
 
       return translatedVector;
     }
