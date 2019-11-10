@@ -244,7 +244,58 @@ const QuickHelp = (props) => {
       <div className="quickHelp_div">
         <h1>Quick Help</h1>
         <h3><b>About Vigenre</b></h3>
-        <p>The Rail Fence cipher, like the Scytale cipher, is a transposition cipher. There are several ways that the rail fence can be set up, we use the most common method found in the literature, also known as the zig-zag cipher.</p>
+        <p>The Vigenere Cipher was invented in the 16th century by French Cryptographer Blaise de Vigenere</p>
+        <h3><b>How To Encrypt</b></h3>
+        <p>1. Input the plaintext message into the Input box.</p>
+        <p>2. Input the keyword, into the Keyword box</p>
+        <p>3. Click the Encrypt button. At this point the Output box will display the ciphertext message.</p>
+        <h3><b>How To Decrypt</b></h3>
+        <p>1. Input the ciphertext message into the Input box.</p>
+        <p>2. Input the keyword, into the Keyword box.</p>
+        <p>3. Click the Decrypt button. At this point the Output box will display the plaintext message <br/><br/><br/></p>
+      </div>
+    );
+  }
+  else if (props.whichCipher === 'mono'){
+    return (
+      <div className="quickHelp_div">
+        <h1>Quick Help</h1>
+        <h3><b>About Mono-Alphabetic Subtitution</b></h3>
+        <p>The Mono-Alphabetic Substitution was created based on the Atbash Cipher, please refer there for more information</p>
+        <h3><b>How To Encrypt</b></h3>
+        <p>1. Input the plaintext message into the Input box.</p>
+        <p>2. Input a Cipher Alphabet with all 26 letters into the Cipher Alphabet Box</p>
+        <p>3. Click the Encrypt button. At this point the Output box will display the ciphertext message.</p>
+        <h3><b>How To Decrypt</b></h3>
+        <p>1. Input the ciphertext message into the Input box.</p>
+        <p>2. Input a Cipher Alphabet with all 26 letters into the Cipher Alphabet Box</p>
+        <p>3. Click the Decrypt button. At this point the Output box will display the plaintext message <br/><br/><br/></p>
+      </div>
+    );
+  }
+  else if (props.whichCipher === 'kama'){
+    return (
+      <div className="quickHelp_div">
+        <h1>Quick Help</h1>
+        <h3><b>About Kamasutra</b></h3>
+        <p>The Kamasutra Cipher is one of the oldest known ciphers in history. It released was in the Kamasutra around 400BC</p>
+        <h3><b>How To Encrypt</b></h3>
+        <p>1. Input the plaintext message into the Input box.</p>
+        <p>2. Input a Cipher Alphabet with all 26 letters into the Cipher Alphabet Box</p>
+        <p>3. Click the Encrypt button. At this point the Output box will display the ciphertext message.</p>
+        <h3><b>How To Decrypt</b></h3>
+        <p>1. Input the ciphertext message into the Input box.</p>
+        <p>2. Input a Cipher Alphabet with all 26 letters into the Cipher Alphabet Box</p>
+        <p>3. Click the Decrypt button. At this point the Output box will display the plaintext message <br/><br/><br/></p>
+      </div>
+    );
+  }
+  else if (props.whichCipher === 'enig'){
+    return (
+      <div className="quickHelp_div">
+        <h1>Quick Help</h1>
+        <h3><b>About Enigma Machine</b></h3>
+        <p>The Enigma Machine was offically invented by Arthur Scherbius in 1918, at the end of WWI, but several improvements were made before it's debut in 1923</p>
         <h3><b>How To Encrypt</b></h3>
         <p>1. Input the plaintext message into the Input box.</p>
         <p>2. Input the number of rails being used.</p>
@@ -252,6 +303,35 @@ const QuickHelp = (props) => {
         <h3><b>How To Decrypt</b></h3>
         <p>1. Input the ciphertext message into the Input box.</p>
         <p>2. Input the number of rails being used.</p>
+        <p>3. Click the Decrypt button. At this point the Output box will display the plaintext message <br/><br/><br/></p>
+      </div>
+    );
+  }
+  else if (props.whichCipher === 'hill'){
+    return (
+      <div className="quickHelp_div">
+        <h1>Quick Help</h1>
+        <h3><b>About Hill</b></h3>
+        <p>The Hill cipher is a polygrphic substitution cipher invented by Lester S. Hill in 1929</p>
+        <h3><b>How To Encrypt</b></h3>
+        <p>1. Input the plaintext message into the Input box.</p>
+        <p>2. Input numbers to be put into a nxn matrix, into the Matrix box. Each number should be seperated by a comma ex. 1,2,3,4</p>
+        <p>3. Input a number, minimum of 2, and maximum of 7 for the n for your nxn matrix</p>
+        <p>4. Click the Encrypt button. At this point the Output box will display the ciphertext message.</p>
+      </div>
+    );
+  }
+  else if (props.whichCipher === 'at'){
+    return (
+      <div className="quickHelp_div">
+        <h1>Quick Help</h1>
+        <h3><b>About Atbash</b></h3>
+        <p>The first cipher was found in Israel, thought to be created by Jewish rebels, was originally used to encrypt the Hewbrew alphabet</p>
+        <h3><b>How To Encrypt</b></h3>
+        <p>1. Input the plaintext message into the Input box.</p>
+        <p>3. Click the Encrypt button. At this point the Output box will display the ciphertext message.</p>
+        <h3><b>How To Decrypt</b></h3>
+        <p>1. Input the ciphertext message into the Input box.</p>
         <p>3. Click the Decrypt button. At this point the Output box will display the plaintext message <br/><br/><br/></p>
       </div>
     );
