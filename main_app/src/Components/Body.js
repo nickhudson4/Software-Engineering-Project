@@ -10,10 +10,12 @@ class Body extends Component {
     super();
     this.sideBarOnClick = this.sideBarOnClick.bind(this)
     this.topBarOnClick = this.topBarOnClick.bind(this)
+    this.toolOnClick = this.toolOnClick.bind(this)
 
     this.state = {
       currentLayout: 'home',
-      whichCipher: 'none'
+      whichCipher: 'none',
+      whichTool: 'none'
     }
   }
 
@@ -24,14 +26,24 @@ class Body extends Component {
   sideBarOnClick = (whichButton) => { //Use arrow functions to use "this."
     this.setState({
       whichCipher: whichButton,
-      currentLayout: 'cipher'
+      currentLayout: 'cipher',
+      whichTool: 'none'
     })
   }
 
   topBarOnClick = (layout) => {
     this.setState({
       whichCipher: 'none',
-      currentLayout: layout
+      currentLayout: layout,
+      whichTool: 'none'
+    })
+  }
+
+  toolOnClick = (whichTool) => {
+    this.setState({
+      whichCipher: 'none',
+      currentLayout: 'tools',
+      whichTool: whichTool
     })
   }
 
@@ -39,8 +51,8 @@ class Body extends Component {
     return (
         <body>
           <SidebarMenu onClickFunc = {this.sideBarOnClick}/>
-          <TopbarMenu onClickFunc = {this.topBarOnClick}/>
-          <InnerBody whichLayout = {this.state.currentLayout} whichCipherClicked = {this.state.whichCipher}/>        
+          <TopbarMenu onClickFunc = {this.topBarOnClick} toolOnClick = {this.toolOnClick}/>
+          <InnerBody whichLayout = {this.state.currentLayout} whichCipherClicked = {this.state.whichCipher} whichTool = {this.state.whichTool}/>        
         </body>
     );
   }

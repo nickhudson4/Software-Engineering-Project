@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2|Josefin+Sans'); /* Google font */ 
+
+.tools_parent_div {
+    /* background-color: rgb(185, 185, 185); */
+    padding-left: 220px;
+}
+.inputOutput_textArea{
+    margin: 10px;
+}
+
+.selections_div{
+    text-align: center;
+}
+.selections_div button{
+    border: none;
+    margin: 5px;
+}
+.selections_div select{
+    border: none;
+    margin: 5px;
+}
