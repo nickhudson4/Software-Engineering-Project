@@ -22,10 +22,12 @@
   color: wheat;
 }
 .specific_cipher_class button{
-  color: #20a0e5;
-  background-color: black;
+  /* color: #20a0e5; */
+  color: black;
+  /* background-color: black; */
   /* border: 1px solid #20a0e5; */
   border: none;
+  margin: 10px;
 } 
 
 .textBox_form {

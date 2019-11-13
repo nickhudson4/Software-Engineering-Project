@@ -25,7 +25,7 @@ class InnerBody extends Component {
     }
     else if (this.props.whichLayout === 'tools'){
       return (
-        <ToolsArea/>
+        <ToolsArea whichTool = {this.props.whichTool}/>
       );
     }
     else { //temp just return empty div
