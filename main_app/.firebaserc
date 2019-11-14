@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "cryptography-explorer",
+    "cryptExplorer": "cryptography-explorer"
+  }
+}

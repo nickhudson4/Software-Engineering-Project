@@ -19,6 +19,7 @@ export var hill = (function () {
     }
 
 
+
     hill.messageEncrypt = function(message, size, inputMatrix){
 
       let buff = [];
@@ -44,10 +45,10 @@ export var hill = (function () {
     }
 
 
+
     hill.multiplier = function(size, inputVector, inputMatrix)
     {
       var outputVector = [];
-
       //Matrix Multiplication
       var tempArray = [];
       for (var i = 0; i < size; i++){
@@ -152,12 +153,20 @@ export var hill = (function () {
     hill.encrypt = function(message, number, n){
       var size = hill.numberParser(n);
       var array = hill.numberParser(number);
+
+      if (size > 7 || size < 2){
+        return "Incorrect Size";
+      }
+
+      if (array.length != (size*size)){
+        return "Not the right enough numbers";
+      }
+
+
       var newMessage = hill.messageEqualizer(message, size);
       var matrix = hill.generateMatrix(size);
       var keyMatrix = hill.setMatrix(size, array, matrix);
       var output = hill.messageEncrypt(newMessage, size, keyMatrix);
-      //var vector = hill.generateVector("bco", 3);
-      //var outputVector = hill.multiplier(size, vector, keyMatrix);
       var translatedVector = hill.encryptMessage(output,"abcdefghijklmnopqrstuvwxyz");
 
       return translatedVector;
