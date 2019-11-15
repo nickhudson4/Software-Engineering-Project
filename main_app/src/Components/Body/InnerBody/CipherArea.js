@@ -317,7 +317,7 @@ const QuickHelp = (props) => {
         <p>1. Input the plaintext message into the Input box.</p>
         <p>2. Input numbers to be put into a nxn matrix, into the Matrix box. Each number should be seperated by a comma ex. 1,2,3,4</p>
         <p>3. Input a number, minimum of 2, and maximum of 7 for the n for your nxn matrix</p>
-        <p>4. Click the Encrypt button. At this point the Output box will display the ciphertext message.</p>
+        <p>4. Click the Encrypt button. At this point the Output box will display the ciphertext message.<br/><br/><br/></p>
       </div>
     );
   }

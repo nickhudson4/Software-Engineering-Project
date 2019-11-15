@@ -1,0 +1,23 @@
+import './Assets/css/body.css'
+
+ .container-fluid {
+	 line-height: 24px;
+}
+
+ footer {
+	 position: relative;
+	 display: block;
+	 width: 100%;
+	 background: #010000;
+	 color: #fff;
+	 height: 800px;
+}
+
+ footer .logo {
+	 position: absolute;
+	 top: 50%;
+	 left: 15px;
+	 -webkit-transform: translateY(-50%);
+	 -moz-transform: translateY(-50%);
+	 transform: translateY(-50%);
+}

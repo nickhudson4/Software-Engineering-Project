@@ -80,10 +80,12 @@ const Encrypt = (props) => {
  var keyword = document.getElementById("keyword_area").value;
  var keysquare = document.getElementById("keysquare_area").value;
  var encryptionWord = document.getElementById("input_textArea").value;
- var temp2 = readfgx.encryption(encryptionWord, keysquare, keyword);
+ var temp = readfgx.encryption(encryptionWord, keysquare, keyword);
+ var output1 = temp.toString();
+ output1 = output1.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
  //var temp = props.inputText
  return (
-     <OutputTextarea message={temp2} />
+     <OutputTextarea message={output1} />
  );
 }
 
@@ -98,6 +100,8 @@ const Decrypt = (props) => {
   var decryptionWord = document.getElementById("input_textArea2").value;
   //var temp2 = readfgx.decryption("XFDDDDFAFGXG", keysquare, keyword);
   var temp2 = readfgx.decryption(decryptionWord, keysquare, keyword);
+  //var output2 = temp2.toString();
+  //output2 = output2.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     return (
         <OutputTextarea message={temp2} />
     );

@@ -481,7 +481,9 @@ export var readfgx = (function () {
           var temp2 = readfgx.decryptionColumnar(keyword, temp1, word.length/keyword.length);
           var temp3 = readfgx.matrixToString(temp2, word.length/keyword.length, keyword.length);
           var temp4 = readfgx.reverseTranslationLoop(temp3);
-          var temp5 = readfgx.decryptionWord(temp4, keysquare);
+          var output1 = temp4.toString();
+          output1 = output1.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+          var temp5 = readfgx.decryptionWord(output1, keysquare);
         }
       }
         //Returns fully decrypted word

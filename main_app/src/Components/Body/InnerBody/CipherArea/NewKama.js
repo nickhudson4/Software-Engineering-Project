@@ -78,9 +78,11 @@ const Encrypt = (props) => {
  var cipherAlphabet = document.getElementById("keysquare_area").value;
  var encryptionWord = document.getElementById("input_textArea").value;
  var temp = kama.encrypt(cipherAlphabet, encryptionWord);
+ var output1 = temp.toString();
+ output1 = output1.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
  //var temp = props.inputText
  return (
-     <OutputTextarea message={temp} />
+     <OutputTextarea message={output1} />
  );
 }
 
@@ -95,8 +97,10 @@ const Decrypt = (props) => {
   var decryptionWord = document.getElementById("input_textArea2").value;
   //var temp2 = kama.decryption("XFDDDDFAFGXG", keysquare, keyword);
   var temp2 = kama.encrypt(cipherAlphabet, decryptionWord);
+  var output2 = temp2.toString();
+  output2 = output2.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     return (
-        <OutputTextarea message={temp2} />
+        <OutputTextarea message={output2} />
     );
 }
 

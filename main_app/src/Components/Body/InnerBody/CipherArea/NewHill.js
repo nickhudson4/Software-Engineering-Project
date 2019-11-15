@@ -78,10 +78,12 @@ const Encrypt = (props) => {
  var matrix = document.getElementById("keyword_area").value;
  var encryptionWord = document.getElementById("input_textArea").value;
  var size = document.getElementById("size_area").value;
- var temp2 = hill.encrypt(encryptionWord, matrix, size);
+ var temp = hill.encrypt(encryptionWord, matrix, size);
+ var output1 = temp.toString();
+ output1 = output1.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
  //var temp = props.inputText
  return (
-     <OutputTextarea message={temp2} />
+     <OutputTextarea message={output1} />
  );
 }
 
@@ -91,11 +93,12 @@ const Decrypt = (props) => {
   //columnar.start(props.inputKeyword)
   //var temp = columnar.translate(props.inputText)
   //var temp2 = columnar.generateMatrix("abcdefghiklmnopqrstuvwxyz" )
-  var keyword = document.getElementById("keyword_area").value;
+  //var keyword = document.getElementById("keyword_area").value;
+
   //var temp2 = columnar.decryption("XFDDDDFAFGXG", keysquare, keyword);
-  var temp2 = hill.decrypt("ixeutptxnxst", "german");
+  //var temp2 = hill.decrypt("ixeutptxnxst", "german");
     return (
-        <OutputTextarea message={temp2} />
+        <OutputTextarea message={"No Decrypt for Hill"} />
     );
 }
 

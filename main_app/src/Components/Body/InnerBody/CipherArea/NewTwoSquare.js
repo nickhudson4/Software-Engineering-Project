@@ -78,9 +78,11 @@ const Encrypt = (props) => {
  var keysquare2 = document.getElementById("keysquare_area2").value;
  var encryptionWord = document.getElementById("input_textArea").value;
  var temp = twosquare.encrypt(encryptionWord, keysquare1, keysquare2);
+ var output1 = temp.toString();
+ output1 = output1.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
  //var temp = twosquare.encrypt("he", "zgptfoihmuwdrcnykeqaxvsbl", "mfnbdcrhsaxyogvituewlqzkp");
  return (
-     <OutputTextarea message={temp} />
+     <OutputTextarea message={output1} />
  );
 }
 
@@ -91,8 +93,10 @@ const Decrypt = (props) => {
   var keysquare2 = document.getElementById("keysquare_area2").value;
   var decryptionWord = document.getElementById("input_textArea2").value;
   var temp2 = twosquare.encrypt(decryptionWord, keysquare1, keysquare2);
+  var output2 = temp2.toString();
+  output2 = output2.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     return (
-        <OutputTextarea message={temp2} />
+        <OutputTextarea message={output2} />
     );
 }
 

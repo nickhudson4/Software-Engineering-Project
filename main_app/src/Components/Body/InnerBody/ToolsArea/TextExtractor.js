@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import './CipherArea.css';
-import Table from './Table';
-import { playfair } from './Playfair.js'
-
+import './ToolsArea.css';
+import { extract } from './Extract.js'
+//import Table from './Table';
 /*
     Renders specific component based on cipher chosen.
     Actual cipher backend logic will come from here
@@ -16,7 +15,7 @@ t      i     e       n
 
 */
 
-class NewPlayfair extends Component {
+class TextExtractor extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -32,19 +31,16 @@ class NewPlayfair extends Component {
     render() {
         return (
             <div id="railFence_div" className="specific_cipher_class">
-                <h1>Playfair</h1>
 
                 <div id="input_textArea_div" className="input_text_area">
-                    <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
-                    <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Decrypt" rows="25" cols="25"></textarea><br/>
-                    <textarea className="inputOutput_textArea" id="keysquare_area" placeholder="Keysquare" rows="1" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Input Text" rows="1" cols="26"></textarea><br/>
+                    <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Extract Amount" rows="1" cols="10"></textarea>
+                    <textarea className="inputOutput_textArea" id="input_textArea3" placeholder="Skip" rows="1" cols="10"></textarea>
+                    <textarea className="inputOutput_textArea" id="input_textArea4" placeholder="Start" rows="1" cols="10"></textarea>
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
-                        <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
-                        <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
-
+                        <button type="button" onClick={this.encryptOnClick}>Extract</button>
                     </div>
-
 
                 </div>
                 <LoadMode mode = {this.state.mode} inputKeyword = {this.state.keyword} inputText = {this.state.inputText} inputKeysquare = {this.state.keysquare}/>
@@ -59,40 +55,40 @@ class NewPlayfair extends Component {
       mode: 'encrypt'
     })
   }
-
-  decryptOnClick = () => {
-    var text = document.getElementById("input_textArea2").value;  //Inputed text
-    this.setState({
-      inputText: text,
-      mode: 'decrypt'
-    })
-  }
 }
 
-export default NewPlayfair;
+
+export default TextExtractor;
 
 
 const Encrypt = (props) => {
- var keysquare = document.getElementById("keysquare_area").value;
- var encryptionWord = document.getElementById("input_textArea").value;
- var temp = playfair.encrypt(encryptionWord, keysquare);
- var output1 = temp.toString();
- output1 = output1.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+ //atbash.start(props.inputKeyword)
+ //var temp = atbash.encrypt(props.inputText)
+ var inputText = document.getElementById("input_textArea").value;
+ var extractAmount = parseFloat(document.getElementById("input_textArea2").value);
+ var skip = parseFloat(document.getElementById("input_textArea3").value);
+ var start = parseFloat(document.getElementById("input_textArea4").value);
+ //var temp = atbash.encrypt(encryptionWord);
+ var temp = extract.parse(inputText, extractAmount, skip, start);
+ var output = temp.toString();
+ output = output.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
  return (
-     <OutputTextarea message={output1} />
+     <OutputTextarea message={output}/>
  );
 }
 
 
 
+
 const Decrypt = (props) => {
-  var keysquare = document.getElementById("keysquare_area").value;
-  var decryptionWord = document.getElementById("input_textArea2").value;
-  var temp2 = playfair.encrypt(decryptionWord, keysquare);
-  var output2 = temp2.toString();
-  output2 = output2.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+  //atbash.start(props.inputKeyword)
+  //var temp = atbash.translate(props.inputText)
+  //var temp2 = atbash.generateMatrix("abcdefghiklmnopqrstuvwxyz" )
+  //var decryptionWord = document.getElementById("input_textArea2").value;
+  //var temp2 = atbash.decryption("XFDDDDFAFGXG", keysquare, keyword);
+  //var temp2 = atbash.encrypt(decryptionWord);
     return (
-        <OutputTextarea message={output2} />
+        <OutputTextarea message={"Good-Bye"} />
     );
 }
 
@@ -115,11 +111,6 @@ const LoadMode = (props) => {
     if (mode === 'encrypt'){
         return (
             <Encrypt inputKeyword = {inputKeyword} inputText = {inputText}/>
-        );
-    }
-    else if (mode === 'decrypt'){
-        return (
-            <Decrypt inputKeyword = {inputKeyword} inputText = {inputText}/>
         );
     }
     else {

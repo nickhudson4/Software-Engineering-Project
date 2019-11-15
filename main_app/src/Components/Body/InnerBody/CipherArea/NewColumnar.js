@@ -38,7 +38,6 @@ class NewColumnar extends Component {
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
                     <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Decrypt" rows="25" cols="25"></textarea><br/>
                     <textarea className="inputOutput_textArea" id="keyword_area" placeholder="Keyword" rows="1" cols="25"></textarea>
-                    <textarea className="inputOutput_textArea" id="keysquare_area" placeholder="Keysquare" rows="1" cols="25"></textarea>
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
                         <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
@@ -77,12 +76,13 @@ const Encrypt = (props) => {
  //columnar.start(props.inputKeyword)
  //var temp = columnar.encrypt(props.inputText)
  var keyword = document.getElementById("keyword_area").value;
- var keysquare = document.getElementById("keysquare_area").value;
- var encryptionWord = document.getElementById("input_textArea").value;
- var temp2 = columnar.encrypt("testinput", "german");
+ var message = document.getElementById("input_textArea").value;
+ var temp = columnar.encrypt(message, keyword);
+ var output1 = temp.toString();
+ output1 = output1.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
  //var temp = props.inputText
  return (
-     <OutputTextarea message={temp2} />
+     <OutputTextarea message={output1} />
  );
 }
 
@@ -93,12 +93,13 @@ const Decrypt = (props) => {
   //var temp = columnar.translate(props.inputText)
   //var temp2 = columnar.generateMatrix("abcdefghiklmnopqrstuvwxyz" )
   var keyword = document.getElementById("keyword_area").value;
-  var keysquare = document.getElementById("keysquare_area").value;
-  var decryptionWord = document.getElementById("input_textArea2").value;
+  var decryptMessage = document.getElementById("input_textArea2").value;
   //var temp2 = columnar.decryption("XFDDDDFAFGXG", keysquare, keyword);
-  var temp2 = columnar.decrypt("ixeutptxnxst", "german");
+  var temp2 = columnar.decrypt(decryptMessage, keyword);
+  var output2 = temp2.toString();
+  output2 = output2.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     return (
-        <OutputTextarea message={temp2} />
+        <OutputTextarea message={output2} />
     );
 }
 

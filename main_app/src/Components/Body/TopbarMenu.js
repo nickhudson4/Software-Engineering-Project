@@ -12,8 +12,9 @@ class Menu extends Component {
           <button className="topbar_menu_button" id="tools_button" onClick={() => this.props.onClickFunc("tools")}>Tools</button>
           <div className="tools_dropdown_content">
             <button onClick={() => this.props.toolOnClick("int_calc")}>Integer Calculator</button>
-            <button onClick={() => this.props.toolOnClick("tool2")}>Tool 2</button>
-            <button onClick={() => this.props.toolOnClick("tool3")}>Tool 3</button>
+            <button onClick={() => this.props.toolOnClick("text_extractor")}>Text Extractor</button>
+            <button onClick={() => this.props.toolOnClick("text_combiner")}>Text Combiner</button>
+            <button onClick={() => this.props.toolOnClick("text_converter")}>Text Converter</button>
           </div>
         </div>
       </div>
