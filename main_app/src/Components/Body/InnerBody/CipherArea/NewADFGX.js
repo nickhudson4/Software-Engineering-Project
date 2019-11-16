@@ -100,10 +100,10 @@ const Decrypt = (props) => {
   var decryptionWord = document.getElementById("input_textArea2").value;
   //var temp2 = readfgx.decryption("XFDDDDFAFGXG", keysquare, keyword);
   var temp2 = readfgx.decryption(decryptionWord, keysquare, keyword);
-  //var output2 = temp2.toString();
-  //output2 = output2.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+  var output2 = temp2.toString();
+  output2 = output2.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     return (
-        <OutputTextarea message={temp2} />
+        <OutputTextarea message={output2} />
     );
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './CipherArea.css';
 import Table from './Table';
-//import { Engima } from './engima.js'
+import { enigma } from './Enigma.js'
 
 /*
     Renders specific component based on cipher chosen.
@@ -82,8 +82,9 @@ const Encrypt = (props) => {
  //var encryptionWord = document.getElementById("input_textArea").value;
  //var temp = engima.encrypt(keyword, encryptionWord);
  //var temp = props.inputText
+ var output = enigma.encrypt();
  return (
-     <OutputTextarea message={"Under Construction Dude"} />
+     <OutputTextarea message={output} />
  );
 }
 

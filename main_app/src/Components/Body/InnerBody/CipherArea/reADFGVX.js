@@ -370,9 +370,9 @@ export var readfgvx = (function () {
       //Runs for the length of our plaintext input
       //We're getting the x and y numbered coordinates of each letter in our message
       for (let i = 0; i < numberArray.length; i = i + 2){
-        var a = numberArray[i];
-        var b = numberArray[i+1];
-        word[n] = matrix[a][b];
+        var a = parseFloat(numberArray[i]);
+        var b = parseFloat(numberArray[i+1]);
+        word[n] = a;
         ++n;
     }
       //Returns the numbered x and y locations of each letter in the message coressponding to our ADFGX matrix
@@ -484,8 +484,12 @@ export var readfgvx = (function () {
           var temp1 = readfgvx.generateDecryptionMatrix(keyword, message, message.length);
           var temp2 = readfgvx.decryptionColumnar(keyword, temp1, word.length/keyword.length);
           var temp3 = readfgvx.matrixToString(temp2, word.length/keyword.length, keyword.length);
-          var temp4 = readfgvx.reverseTranslationLoop(temp3);
-          var temp5 = readfgvx.decryptionWord(temp4, keysquare);
+          var output1 = temp3.toString();
+          output1 = output1.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+          var temp4 = readfgvx.reverseTranslationLoop(output1);
+          var output2 = temp4.toString();
+          output2 = output2.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+          var temp5 = readfgvx.decryptionWord(output2, keysquare);
         }
       }
         //Returns fully decrypted word
