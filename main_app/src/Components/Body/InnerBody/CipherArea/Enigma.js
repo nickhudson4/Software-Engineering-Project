@@ -92,8 +92,10 @@ export var enigma = (function () {
           buff[i+1] = ring[i]
       }
       buff[0] = last;
+      var output1 = buff.toString();
+      output1 = output1.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
 
-      return buff;
+      return output1;
     }
 
 
@@ -139,9 +141,22 @@ export var enigma = (function () {
     enigma.translationLoop = function(message, rotor1, rotor2, rotor3){
 
       let buff = [];
-
+      var leftTurns = 0;
+      var middleTurns = 0;
       for (let i = 0; i < message.length; ++i){
           buff[i] = enigma.translateLetter(message[i], rotor1, rotor2, rotor3);
+          //Rotates leftmost rotor after an encryption
+          rotor1 = enigma.rotate(rotor1);
+          ++leftTurns;
+          if (leftTurns == 26){
+            leftTurns = 0;
+            rotor2 = enigma.rotate(rotor2);
+            ++middleTurns;
+            if (leftTurns == 26){
+              middleTurns = 0;
+              rotor3 = enigma.rotate(rotor3);
+            }
+          }
         }
 
 
@@ -157,7 +172,13 @@ export var enigma = (function () {
       let rotor2 = "ajdksiruxblhwtmcqgznpyfvoe";
       let rotor3 = "bdfhjlcprtxvznyeiwgakmusqo";
 
-      var output = enigma.translationLoop("go", rotor1, rotor2, rotor3);
+      var output = enigma.translationLoop("good", rotor1, rotor2, rotor3);
+      //Add Plugboard settings: Letter Swapping
+      //Look into rotor rotation (After every letter encryption)
+      //Add Key Settings: Rotating the alphabet letters
+
+
+
       //let inverseRight = enigma.inverter(right, alphabet);
       //let inverseMiddle = enigma.inverter(middle, alphabet);
       //let inverseLeft = enigma.inverter(left, alphabet);
