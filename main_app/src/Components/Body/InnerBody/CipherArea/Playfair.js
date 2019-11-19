@@ -39,6 +39,14 @@ export var playfair = (function () {
       }
   }
 
+    playfair.keysquareChecker = function(keysquare){
+      //Check for j
+      //Check for duplicates
+      //Check for all Letters, no puntuation
+      //Check for 25 characters
+
+    }
+
 
     //Takes in the full set of coordinates for our message, and the matrix
     playfair.getDiagonals = function(fullCoordinates, matrix){
