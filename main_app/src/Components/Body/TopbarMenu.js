@@ -15,6 +15,7 @@ class Menu extends Component {
             <button onClick={() => this.props.toolOnClick("text_extractor")}>Text Extractor</button>
             <button onClick={() => this.props.toolOnClick("text_combiner")}>Text Combiner</button>
             <button onClick={() => this.props.toolOnClick("text_converter")}>Text Converter</button>
+            <button onClick={() => this.props.toolOnClick("frequency")}>Frequency Analysis</button>
           </div>
         </div>
       </div>

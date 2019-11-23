@@ -4,6 +4,7 @@ import IntegerCalc from './ToolsArea/IntegerCalc';
 import TextExtractor from './ToolsArea/TextExtractor';
 import TextCombiner from './ToolsArea/TextCombiner';
 import TextConverter from './ToolsArea/TextConverter';
+import TextFrequency from './ToolsArea/TextFrequency';
 class ToolsArea extends Component {
   constructor(){
     super();
@@ -30,6 +31,11 @@ class ToolsArea extends Component {
     else if (this.props.whichTool === 'text_converter') {
       return (
         <TextConverter whichTool = {this.props.whichTool}/>
+      );
+    }
+    else if (this.props.whichTool === 'frequency') {
+      return (
+        <TextFrequency whichTool = {this.props.whichTool}/>
       );
     }
     else {
