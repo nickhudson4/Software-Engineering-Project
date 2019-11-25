@@ -100,37 +100,99 @@ class IntegerCalc extends Component {
       }
     }
     else if (selection === '6'){
-
+      if (!input1 || !input2 || !input3){
+        value = 0;
+      }
+      else {
+        value = input1 + (input2 % input3);
+      }
     }
     else if (selection === '7'){
 
+      if (!input1 || !input2 || !input3){
+        value = 0;
+      }
+      else {
+        value = input1 - (input2 % input3);
+      }
     }
     else if (selection === '8'){
 
+      if (!input1 || !input2 || !input3){
+        value = 0;
+      }
+      else {
+        value = input1 * (input2 % input3);
+      }
     }
     else if (selection === '9'){
 
+      if (!input1 || !input2 || !input3){
+        value = 0;
+      }
+      else {
+        value = input1 / (input2 % input3);
+      }
     }
     else if (selection === '10'){
 
+      if (!input1 || !input2 || !input3){
+        value = 0;
+      }
+      else {
+        value = Math.pow(input1, input2 % input3);
+      }
     }
     else if (selection === '11'){
 
+      if (!input1){
+        value = 0;
+      }
+      else {
+        value = fact(input1);
+      }
     }
     else if (selection === '12'){
 
+      if (!input2){
+        value = 0;
+      }
+      else {
+        value = fact(input2);
+      }
     }
     else if (selection === '13'){
 
+      if (!input3){
+        value = 0;
+      }
+      else {
+        value = fact(input3);
+      }
     }
     else if (selection === '14'){
-
+      if (!input1){
+        value = 0;
+      }
+      else {
+        value = Math.sqrt(input1);
+      }
     }
     else if (selection === '15'){
-
+      if (!input2){
+        value = 0;
+      }
+      else {
+        value = Math.sqrt(input2);
+      }
     }
     else if (selection === '16'){
-
+      if (!input3){
+        value = 0;
+      }
+      else {
+        value = Math.sqrt(input3);
+      }
     }
 
     if (!value){
@@ -148,6 +210,15 @@ class IntegerCalc extends Component {
 
 }
 export default IntegerCalc;
+
+function fact(num) {
+  if (num === 0){ 
+    return 1; 
+  }
+  else { 
+    return num * fact( num - 1 ); 
+  }
+}
 
 const OutputTextarea = (props) => {
   console.log("HRE");
