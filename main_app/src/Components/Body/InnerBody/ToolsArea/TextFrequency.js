@@ -31,7 +31,7 @@ class TextFrequency extends Component {
     render() {
         return (
             <div id="railFence_div" className="specific_cipher_class">
-
+                <h1>Text Frequency</h1>
                 <div id="input_textArea_div" className="input_text_area">
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Input Text" rows="1" cols="26"></textarea><br/>
                     {/* <br/> */}

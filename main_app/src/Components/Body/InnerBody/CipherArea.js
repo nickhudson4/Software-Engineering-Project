@@ -14,6 +14,7 @@ import NewAtbash from './CipherArea/NewAtbash';
 import NewKama from './CipherArea/NewKama';
 import NewEnigma from './CipherArea/NewEnigma';
 import NewHill from './CipherArea/NewHill';
+import NewAffine from './CipherArea/NewAffine';
 /*
     Renders specific component based on cipher chosen
 */
@@ -96,6 +97,11 @@ const GetCipher = (props) => {
   else if (props.whichCipher === 'hill'){
     return (
       <NewHill/>
+    );
+  }
+  else if (props.whichCipher === 'aff'){
+    return (
+      <NewAffine/>
     );
   }
   else { //Error return empty div
@@ -321,11 +327,11 @@ const QuickHelp = (props) => {
       </div>
     );
   }
-  else if (props.whichCipher === 'at'){
+  else if (props.whichCipher === 'aff'){
     return (
       <div className="quickHelp_div">
         <h1>Quick Help</h1>
-        <h3><b>About Atbash</b></h3>
+        <h3><b>About Affine</b></h3>
         <p>The first cipher was found in Israel, thought to be created by Jewish rebels, was originally used to encrypt the Hewbrew alphabet</p>
         <h3><b>How To Encrypt</b></h3>
         <p>1. Input the plaintext message into the Input box.</p>
@@ -336,6 +342,7 @@ const QuickHelp = (props) => {
       </div>
     );
   }
+
   else { //Error return empty div
     return (
       <div></div>
