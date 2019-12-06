@@ -37,7 +37,7 @@ class NewColumnar extends Component {
                 <div id="input_textArea_div" className="input_text_area">
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
                     <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Decrypt" rows="25" cols="25"></textarea><br/>
-                    <textarea className="inputOutput_textArea" id="keyword_area" placeholder="Keyword" rows="1" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="keyword_area" placeholder="Key Word" rows="1" cols="25"></textarea>
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
                         <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
@@ -79,7 +79,7 @@ const Encrypt = (props) => {
  var message = document.getElementById("input_textArea").value;
  var temp = columnar.encrypt(message, keyword);
  var output1 = temp.toString();
- output1 = output1.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+ output1 = output1.replace(/[.,\/#!$%\^&\*;:{}=\_`~()]/g,"");
  //var temp = props.inputText
  return (
      <OutputTextarea message={output1} />

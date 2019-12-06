@@ -102,7 +102,7 @@ class NewAffine extends Component {
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
                         <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
-                        <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
+                        {/*<button type="button" onClick={this.decryptOnClick}>Decrypt</button>*/}
                     </div>
 
 

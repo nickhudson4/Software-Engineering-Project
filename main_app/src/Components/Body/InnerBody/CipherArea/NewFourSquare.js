@@ -37,8 +37,8 @@ class NewFourSquare extends Component {
                 <div id="input_textArea_div" className="input_text_area">
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>
                     <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Decrypt" rows="25" cols="25"></textarea><br/>
-                    <textarea className="inputOutput_textArea" id="keysquare_area" placeholder="Keysquare 1" rows="1" cols="25"></textarea>
-                    <textarea className="inputOutput_textArea" id="keysquare_area2" placeholder="Keysquare 2" rows="1" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="keysquare_area" placeholder="Key Word 1" rows="1" cols="25"></textarea>
+                    <textarea className="inputOutput_textArea" id="keysquare_area2" placeholder="Key Word 2" rows="1" cols="25"></textarea>
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
                         <button type="button" onClick={this.encryptOnClick}>Encrypt</button>

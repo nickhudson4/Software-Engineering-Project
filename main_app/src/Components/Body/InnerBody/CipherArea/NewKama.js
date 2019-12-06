@@ -32,7 +32,7 @@ class NewKama extends Component {
     render() {
         return (
             <div id="railFence_div" className="specific_cipher_class">
-                <h1>Kamasutra</h1>
+                <h1>Kama-Sutra</h1>
 
                 <div id="input_textArea_div" className="input_text_area">
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="25" cols="25"></textarea>

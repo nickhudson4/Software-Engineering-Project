@@ -372,7 +372,7 @@ export var readfgvx = (function () {
       for (let i = 0; i < numberArray.length; i = i + 2){
         var a = parseFloat(numberArray[i]);
         var b = parseFloat(numberArray[i+1]);
-        word[n] = a;
+        word[n] = matrix[a][b];
         ++n;
     }
       //Returns the numbered x and y locations of each letter in the message coressponding to our ADFGX matrix

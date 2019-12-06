@@ -144,7 +144,7 @@ export var columnar = (function () {
           }
           //Denotes blanks
           else {
-            tempArray[a][b] = 'x';
+            tempArray[a][b] = '-';
           }
             ++i;
         }

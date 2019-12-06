@@ -29,7 +29,7 @@ class SidebarMenu extends Component {
             <h3 onClick={() => this.props.onClickFunc("adfgvx")}>ADFGVX</h3>
             <h3 onClick={() => this.props.onClickFunc("hill")}>Hill</h3>
             <h3 onClick={() => this.props.onClickFunc("enig")}>Enigma Machine</h3>
-            <h3 onClick={() => this.props.onClickFunc("kama")}>Kamasutra</h3>
+            <h3 onClick={() => this.props.onClickFunc("kama")}>Kama-Sutra</h3>
             <h3 onClick={() => this.props.onClickFunc("aff")}>Affine</h3>
 
         </div>
