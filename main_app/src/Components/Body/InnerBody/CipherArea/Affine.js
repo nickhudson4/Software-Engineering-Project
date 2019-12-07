@@ -94,14 +94,16 @@ export var affine = (function () {
 
       for (let i = 0; i < numberArray.length; ++i){
         var temp = (1 / a);
-        buff[i] = (temp * (numberArray - b));
+        buff[i] = (temp * (numberArray[i] - b)) % 26;
       }
 
       for (let i = 0; i < numberArray.length; ++i){
         buff2[i] = alphabet[buff[i]];
       }
 
-      return buff;
+      var temp2 = (1 / (5 % 26));
+
+      return temp2;
     }
 
 

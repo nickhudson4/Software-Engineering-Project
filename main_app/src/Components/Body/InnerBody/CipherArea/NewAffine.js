@@ -38,7 +38,8 @@ class NewAffine extends Component {
                     <textarea className="inputOutput_textArea" id="input_textArea" placeholder="Encrypt" rows="5" cols="15"></textarea>
                     <textarea className="inputOutput_textArea" id="input_textArea2" placeholder="Decrypt" rows="5" cols="15"></textarea><br/>
                     <div className="selections_div">
-                    <h2>Number 1</h2>
+                    <h2 h1 style={{ color: 'white' }}>Form: c = a(x)+b</h2>
+                    <h4 h1 style={{ color: 'white' }}>Letter a</h4>
                       <select id="calculation_select1" name="Calculations" form="CalcForm">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -68,7 +69,7 @@ class NewAffine extends Component {
                       </select>
                     </div>
                     <div className="selections_div">
-                    <h2>Number 2</h2>
+                    <h4 h1 style={{ color: 'white' }}>Letter b</h4>
                       <select id="calculation_select2" name="Calculations" form="CalcForm">
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -101,7 +102,7 @@ class NewAffine extends Component {
                     {/* <br/> */}
                     <div id="actions_div_id" className="actions_div">
                         <button type="button" onClick={this.encryptOnClick}>Encrypt</button>
-                        <button type="button" onClick={this.decryptOnClick}>Decrypt</button>
+                        {/*<button type="button" onClick={this.decryptOnClick}>Decrypt</button>*/}
                     </div>
 
 
